@@ -1,11 +1,11 @@
 import endOfToday from "date-fns/endOfToday";
-export default function createTodo(
+const createTodo = (
   title,
   dueDate = endOfToday(),
   description = "",
   priority = "",
   notes = ""
-) {
+) => {
   const getTitle = () => title;
   const getDescription = () => description;
   const getDueDate = () => dueDate;
@@ -19,4 +19,6 @@ export default function createTodo(
     getPriority,
     getNote,
   };
-}
+};
+
+export default createTodo;
