@@ -1,4 +1,4 @@
-export default function createProject(title) {
+const createProject = (title) => {
   const todos = [];
   const getTitle = () => title;
   const addTodo = (todo) => todos.push(todo);
@@ -9,4 +9,6 @@ export default function createProject(title) {
   const getTodos = () => todos;
 
   return { getTitle, addTodo, deleteTodo, getTodos };
-}
+};
+
+export default createProject;
