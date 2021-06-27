@@ -6,8 +6,16 @@ export const addProject = (project) => {
 export const getProjects = () => {
   return projects;
 };
-export const storeInLocalStorage = (key, obj) => {
-  return localStorage.setItem(key, JSON.stringify(obj));
+
+export const findProject = (title) => {
+  return projects.find((project) => project.getTitle() === title);
+};
+
+export const storeProjectsInLocalStorage = () => {
+  localStorage.setItem("projects", JSON.stringify(projects));
+};
+export const retrieveProjectsFromLocalStorage = () => {
+  JSON.parse(localStorage.getItem("projects"));
 };
 export const retrieveFromLocalStorage = (key) => {
   return JSON.parse(localStorage.getItem(key));
