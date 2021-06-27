@@ -1,8 +1,11 @@
+import isToday from "date-fns/isToday";
+
 const projects = [];
 
 export const addProject = (project) => {
   projects.push(project);
 };
+
 export const getProjects = () => {
   return projects;
 };
@@ -17,6 +20,13 @@ export const storeProjectsInLocalStorage = () => {
 export const retrieveProjectsFromLocalStorage = () => {
   JSON.parse(localStorage.getItem("projects"));
 };
-export const retrieveFromLocalStorage = (key) => {
-  return JSON.parse(localStorage.getItem(key));
+
+export const getTodosDueToday = () => {
+  const dueToday = [];
+  projects.forEach((project) => {
+    project.getTodos().forEach((todo) => {
+      if (isToday(todo.getDueDate())) dueToday.push(todo);
+    });
+  });
+  return dueToday;
 };
