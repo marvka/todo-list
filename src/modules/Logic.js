@@ -6,12 +6,20 @@ import createTodo from "./Todo";
 export const initialize = () => {
   Data.retrieveProjectsFromLocalStorage();
   if (!Data.getProjects().length) {
-    const defaultProject = createProject("Default");
-    const defaultTodo = createTodo("Default Todo");
-
-    defaultProject.addTodo(defaultTodo);
-    Data.addProject(defaultProject);
+    populateDefaultData();
   }
   UI.initialize();
-  const defaultProject = Data.getProjects()[0];
+};
+
+const populateDefaultData = () => {
+  if (!Data.getProjects().length) {
+    const inbox = createProject("Inbox");
+    const greetingTodo = createTodo("This is a todo");
+    inbox.addTodo(greetingTodo);
+    const helpTodo = createTodo(
+      "Feel free to add your own projects and todos!"
+    );
+    inbox.addTodo(helpTodo);
+    Data.addProject(inbox);
+  }
 };

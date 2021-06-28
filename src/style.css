@@ -1,0 +1,34 @@
+header {
+  width: 100%;
+  text-align: center;
+}
+
+#sidebar li {
+  list-style: none;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 0;
+  /* background-color: #777; */
+}
+
+header {
+  grid-column: span 2;
+  border-bottom: 1px solid black;
+}
+
+nav,
+#todo-view-container {
+  border: solid black;
+  border-width: 0 1px 1px 0;
+}
+
+.todo {
+  display: flex;
+}
+
+.due-date {
+  margin-left: auto;
+}
