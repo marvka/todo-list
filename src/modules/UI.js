@@ -89,7 +89,7 @@ const loadTodos = (todos) => {
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
     todoCheckbox.dataset.todoTitle = todo.getTitle();
-    todoCheckbox.classList.add("checkbox");
+    todoCheckbox.classList.add("delete-todo");
     todoContainer.appendChild(todoCheckbox);
 
     const todoTitle = document.createElement("div");
