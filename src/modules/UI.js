@@ -1,6 +1,7 @@
 //TODO: Later, make a UI folder and turn sidebar and todo overview into modules, have UI logic in UI.js
 import * as Data from "./Data";
 import formatISO from "date-fns/formatISO";
+import { loadSidebarEventlisteners } from "./EventListeners";
 
 const body = document.querySelector("body");
 
@@ -45,7 +46,7 @@ const loadSidebar = () => {
   sidebarList.appendChild(today);
 
   addProjectsToSidebar(Data.getProjects());
-  addSidebarEventlisteners();
+  loadSidebarEventlisteners();
 };
 
 const addProjectsToSidebar = (projectArr) => {
@@ -58,23 +59,7 @@ const addProjectsToSidebar = (projectArr) => {
   });
 };
 
-const addSidebarEventlisteners = () => {
-  const today = document.getElementById("today");
-  today.addEventListener("click", loadDueToday);
-
-  const projectListItems = document.querySelectorAll(".project");
-  projectListItems.forEach((projectListItem) => {
-    projectListItem.addEventListener("click", projectEventListener);
-  });
-};
-
-const projectEventListener = (event) => {
-  const project = Data.findProject(event.target.textContent);
-  if (!project) throw "Project not found!";
-  loadProject(project);
-};
-
-const loadDueToday = () => {
+export const loadDueToday = () => {
   unloadTodoView();
   const todoViewContainer = document.getElementById("todo-view-container");
   const todos = Data.getTodosDueToday();
@@ -84,7 +69,7 @@ const loadDueToday = () => {
   loadTodos(todos);
 };
 
-const loadProject = (project) => {
+export const loadProject = (project) => {
   unloadTodoView();
   const todoViewContainer = document.getElementById("todo-view-container");
   const heading = document.createElement("h2");
