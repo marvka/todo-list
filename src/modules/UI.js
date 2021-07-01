@@ -47,7 +47,7 @@ const loadSidebar = () => {
   sidebar.appendChild(inbox);
 
   const today = document.createElement("li");
-  today.id = "inbox";
+  today.id = "today";
   today.textContent = "Today";
   today.addEventListener("click", EventListeners.loadDueToday);
   sidebar.appendChild(today);
@@ -68,11 +68,12 @@ export const loadProject = (project) => {
   heading.textContent = project.getTitle();
   todoViewContainer.appendChild(heading);
 
-  loadTodos(project.getTodos());
+  loadTodos(project);
 };
 
-const loadTodos = (todos) => {
+const loadTodos = (project) => {
   const todoViewContainer = document.getElementById("todo-view-container");
+  const todos = project.getTodos();
 
   todos.forEach((todo) => {
     const todoContainer = document.createElement("div");
@@ -80,6 +81,7 @@ const loadTodos = (todos) => {
 
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
+    todoCheckbox.dataset.project = project.getTitle();
     todoCheckbox.dataset.todoTitle = todo.getTitle();
     todoCheckbox.classList.add("delete-todo");
     todoCheckbox.addEventListener("click", EventListeners.deleteTodo);

@@ -24,4 +24,9 @@ export const loadProject = (event) => {
   UI.loadProject(project);
 };
 
+export const deleteTodo = (event) => {
+  const title = event.target.dataset.todoTitle;
+  const project = findProject(event.target.dataset.project);
+  project.deleteTodo(title);
+  UI.loadProject(project);
 };
