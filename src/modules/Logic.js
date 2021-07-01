@@ -20,6 +20,6 @@ const populateDefaultData = () => {
       "Feel free to add your own projects and todos!"
     );
     inbox.addTodo(helpTodo);
-    Data.addProject(inbox);
+    Data.setInbox(inbox);
   }
 };

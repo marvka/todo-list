@@ -40,18 +40,19 @@ const loadSidebar = () => {
   sidebarList.id = "projects";
   sidebar.appendChild(sidebarList);
 
+  const inbox = document.createElement("li");
+  inbox.id = "inbox";
+  inbox.textContent = "Inbox";
+  inbox.addEventListener("click", EventListeners.loadProject);
+  sidebar.appendChild(inbox);
+
   const today = document.createElement("li");
+  today.id = "inbox";
   today.textContent = "Today";
-  today.id = "today";
   today.addEventListener("click", EventListeners.loadDueToday);
-  sidebarList.appendChild(today);
+  sidebar.appendChild(today);
 
-  addProjectsToSidebar(Data.getProjects());
-};
-
-const addProjectsToSidebar = (projectArr) => {
-  const sidebarList = document.getElementById("projects");
-  projectArr.forEach((project) => {
+  Data.getProjects().forEach((project) => {
     const projectElement = document.createElement("li");
     projectElement.textContent = project.getTitle();
     projectElement.classList.add("project");
