@@ -30,18 +30,29 @@ export const findProject = (title) => {
     : null;
 };
 
-export const storeProjectsInLocalStorage = () => {
+export const storeInLocalStorage = () => {
+  localStorage.setItem("inbox", JSON.stringify(inbox));
   localStorage.setItem("projects", JSON.stringify(projects));
 };
-export const retrieveProjectsFromLocalStorage = () => {
-  JSON.parse(localStorage.getItem("projects"));
+
+export const retrieveFromLocalStorage = () => {
+  if (JSON.parse(localStorage.getItem("projects"))) {
+    projects.length = 0;
+    JSON.parse(localStorage.getItem("projects")).forEach((project) =>
+      projects.push(project)
+    );
+  }
+  if (JSON.parse(localStorage.getItem("inbox"))) {
+    wipeObj(inbox);
+    setInbox(inbox, JSON.parse(localStorage.getItem("inbox")));
+  }
 };
 
 export const getTodosDueToday = () => {
   const dueToday = [];
   projects.forEach((project) => {
     dueToday.push(project.getTodosDueToday());
-    });
+  });
   inbox.getTodosDueToday().forEach((todo) => dueToday.push(todo));
   return dueToday;
 };
