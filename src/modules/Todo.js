@@ -8,7 +8,7 @@ const createTodo = (title, dueDate = endOfToday()) => {
   const getDescription = () => description;
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
-  const getNote = () => notes;
+  const getNotes = () => notes;
   const isDueToday = () => isToday(dueDate);
   const linkProject = (project) => (linkedProject = project);
   const getLinkedProject = () => linkedProject;
@@ -18,7 +18,7 @@ const createTodo = (title, dueDate = endOfToday()) => {
     getDescription,
     getDueDate,
     getPriority,
-    getNote,
+    getNotes,
     isDueToday,
     linkProject,
     getLinkedProject,
