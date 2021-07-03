@@ -1,3 +1,4 @@
+"use strict";
 const createProject = (title) => {
   const todos = [];
   const getTitle = () => title;

@@ -1,3 +1,4 @@
+"use strict";
 import * as Data from "./Data";
 import * as UI from "./UI";
 import createProject from "./Project";

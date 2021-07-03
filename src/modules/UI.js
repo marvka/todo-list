@@ -1,3 +1,4 @@
+"use strict";
 //TODO: Later, make a UI folder and turn sidebar and todo overview into modules, have UI logic in UI.js
 import * as Data from "./Data";
 import * as EventListeners from "./EventListeners";

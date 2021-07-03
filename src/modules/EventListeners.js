@@ -1,3 +1,4 @@
+"use strict";
 import * as UI from "./UI";
 import { findProject, getTodosDueToday } from "./Data";
 import createProject from "./Project";

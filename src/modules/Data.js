@@ -1,3 +1,4 @@
+"use strict";
 import { wipeObj } from "./Helper";
 
 const inbox = {}; // Inbox "project"

@@ -1,3 +1,4 @@
+"use strict";
 import endOfToday from "date-fns/endOfToday";
 import isToday from "date-fns/isToday";
 
