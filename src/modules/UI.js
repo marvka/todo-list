@@ -45,13 +45,13 @@ const loadSidebar = () => {
   inbox.id = "inbox";
   inbox.textContent = "Inbox";
   inbox.addEventListener("click", EventListeners.loadProject);
-  sidebar.appendChild(inbox);
+  sidebarList.appendChild(inbox);
 
   const today = document.createElement("li");
   today.id = "today";
   today.textContent = "Today";
   today.addEventListener("click", EventListeners.loadDueToday);
-  sidebar.appendChild(today);
+  sidebarList.appendChild(today);
 
   Data.getProjects().forEach((project) => {
     const projectElement = document.createElement("li");
