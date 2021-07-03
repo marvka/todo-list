@@ -2,19 +2,16 @@
 import endOfToday from "date-fns/endOfToday";
 import isToday from "date-fns/isToday";
 
-const createTodo = (
-  title,
-  dueDate = endOfToday(),
-  description = "",
-  priority = "",
-  notes = ""
-) => {
+const createTodo = (title, dueDate = endOfToday()) => {
+  let linkedProject;
   const getTitle = () => title;
   const getDescription = () => description;
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
   const getNote = () => notes;
   const isDueToday = () => isToday(dueDate);
+  const linkProject = (project) => (linkedProject = project);
+  const getLinkedProject = () => linkedProject;
 
   return {
     getTitle,
@@ -23,6 +20,8 @@ const createTodo = (
     getPriority,
     getNote,
     isDueToday,
+    linkProject,
+    getLinkedProject,
   };
 };
 

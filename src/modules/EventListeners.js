@@ -13,9 +13,11 @@ export const addToSidebar = () => {
   });
 };
 
-export const loadDueToday = (event) => {
-  const tempProject = createProject("Due Today");
-  getTodosDueToday().forEach((todo) => tempProject.addTodo(todo));
+export const loadDueToday = () => {
+  const tempProject = createProject("Today");
+  getTodosDueToday().forEach((todo) => {
+    tempProject.addTodo(todo);
+  });
   UI.loadProject(tempProject);
 };
 
@@ -28,6 +30,11 @@ export const loadProject = (event) => {
 export const deleteTodo = (event) => {
   const title = event.target.dataset.todoTitle;
   const project = findProject(event.target.dataset.project);
+  const currentView = event.target.parentNode.parentNode.firstChild.textContent;
   project.deleteTodo(title);
-  UI.loadProject(project);
+  if (currentView === "Today") {
+    loadDueToday();
+  } else {
+    UI.loadProject(project);
+  }
 };
