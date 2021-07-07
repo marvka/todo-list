@@ -111,7 +111,7 @@ export const loadProjectForm = () => {
   dueDateLabel.setAttribute("for", "form-dueDate");
   dueDateContainer.appendChild(dueDateLabel);
   const dueDateInput = document.createElement("input");
-  dueDateInput.setAttribute("type", "text");
+  dueDateInput.setAttribute("type", "date");
   dueDateInput.id = "form-dueDate";
   dueDateContainer.appendChild(dueDateInput);
   projectForm.appendChild(dueDateContainer);
