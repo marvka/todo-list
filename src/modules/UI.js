@@ -12,7 +12,6 @@ export const initialize = () => {
   loadHeader();
   loadSidebar();
   loadProject(Data.findProject("Inbox"));
-  Forms.loadAddProjectForm();
 };
 
 const loadLayout = () => {
@@ -67,6 +66,7 @@ export const loadSidebar = () => {
   const addProject = document.createElement("li");
   addProject.textContent = "+ Project";
   addProject.id = "add-project";
+  addProject.addEventListener(EventListeners.loadNewProjectForm);
   sidebar.appendChild(addProject);
 };
 

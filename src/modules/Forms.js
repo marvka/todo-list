@@ -1,7 +1,7 @@
-import * as EventListeners from "./EventListeners"
+import * as EventListeners from "./EventListeners";
 const body = document.querySelector("body");
 
-export const loadAddProjectForm = () => {
+export const loadNewProjectForm = () => {
   const formContainer = document.createElement("div");
   formContainer.id = "add-project-form";
   body.appendChild(formContainer);
@@ -18,7 +18,7 @@ export const loadAddProjectForm = () => {
   const buttonContainer = document.createElement("div");
   const addButton = document.createElement("button");
   addButton.textContent = "Add";
-  addButton.addEventListener("click",EventListeners.addNewProject)
+  addButton.addEventListener("click", EventListeners.addNewProject);
   buttonContainer.appendChild(addButton);
   const cancelButton = document.createElement("button");
   cancelButton.textContent = "Cancel";
@@ -26,7 +26,7 @@ export const loadAddProjectForm = () => {
   formContainer.appendChild(buttonContainer);
 };
 
-export const loadAddTodoForm = () => {
+export const loadNewTodoForm = () => {
   const todoForm = document.createElement("div");
   todoForm.id = "form-add-todo";
   body.appendChild(todoForm);
