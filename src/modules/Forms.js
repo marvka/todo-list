@@ -27,6 +27,13 @@ export const loadNewProjectForm = () => {
   formContainer.appendChild(buttonContainer);
 };
 
+export const clearForm = () => {
+  const formContainer = document.querySelector("div#form-container");
+  if (formContainer) {
+    formContainer.remove();
+  }
+};
+
 export const loadNewTodoForm = () => {
   const todoForm = document.createElement("div");
   todoForm.id = "form-add-todo";

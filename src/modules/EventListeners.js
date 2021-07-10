@@ -33,14 +33,15 @@ export const addNewProject = () => {
     Data.addProject(project);
     project.getTodos().forEach((todo) => console.log(todo));
     UI.loadSidebar();
+    Forms.clearForm();
+  }
+};
+
   }
 };
 
 export const clearForm = () => {
-  const formContainer = document.querySelector("div#form-container");
-  if (formContainer) {
-    formContainer.remove();
-  }
+  Forms.clearForm();
 };
 
 export const loadProject = (event) => {
