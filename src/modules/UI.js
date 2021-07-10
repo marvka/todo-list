@@ -66,7 +66,7 @@ export const loadSidebar = () => {
   const addProject = document.createElement("li");
   addProject.textContent = "+ Project";
   addProject.id = "add-project";
-  addProject.addEventListener(EventListeners.loadNewProjectForm);
+  addProject.addEventListener("click", EventListeners.loadNewProjectForm);
   sidebar.appendChild(addProject);
 };
 

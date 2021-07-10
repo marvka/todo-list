@@ -1,6 +1,7 @@
 "use strict";
 import * as UI from "./UI";
 import * as Data from "./Data";
+import * as Forms from "./Forms";
 import createProject from "./Project";
 
 export const addToSidebar = () => {
@@ -13,6 +14,10 @@ export const addToSidebar = () => {
   });
 };
 
+export const loadNewProjectForm = () => {
+  Forms.loadNewProjectForm();
+};
+
 export const loadDueToday = () => {
   const tempProject = createProject("Today");
   Data.getTodosDueToday().forEach((todo) => {
@@ -22,7 +27,7 @@ export const loadDueToday = () => {
 };
 
 export const addNewProject = () => {
-  if (document.querySelector("div#add-project-form")) {
+  if (document.querySelector("div#form-container")) {
     const title = document.getElementById("form-title").value;
     const project = createProject(title);
     Data.addProject(project);
@@ -30,6 +35,14 @@ export const addNewProject = () => {
     UI.loadSidebar();
   }
 };
+
+export const clearForm = () => {
+  const formContainer = document.querySelector("div#form-container");
+  if (formContainer) {
+    formContainer.remove();
+  }
+};
+
 export const loadProject = (event) => {
   const project = Data.findProject(event.target.textContent);
   if (!project) throw "Project not found!";

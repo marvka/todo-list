@@ -3,7 +3,7 @@ const body = document.querySelector("body");
 
 export const loadNewProjectForm = () => {
   const formContainer = document.createElement("div");
-  formContainer.id = "add-project-form";
+  formContainer.id = "form-container";
   body.appendChild(formContainer);
 
   const titleLabel = document.createElement("label");
@@ -22,6 +22,7 @@ export const loadNewProjectForm = () => {
   buttonContainer.appendChild(addButton);
   const cancelButton = document.createElement("button");
   cancelButton.textContent = "Cancel";
+  cancelButton.addEventListener("click", EventListeners.clearForm);
   buttonContainer.appendChild(cancelButton);
   formContainer.appendChild(buttonContainer);
 };
