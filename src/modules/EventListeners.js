@@ -15,6 +15,7 @@ export const addToSidebar = () => {
 };
 
 export const loadNewProjectForm = () => {
+  Forms.clearForm();
   Forms.loadNewProjectForm();
 };
 
