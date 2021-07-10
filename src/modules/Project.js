@@ -11,7 +11,9 @@ const createProject = (title) => {
   const getTodosDueToday = () => {
     const dueToday = [];
     todos.forEach((todo) => {
-      if (todo.isDueToday()) dueToday.push(todo);
+      if (todo.isDueToday()) {
+        dueToday.push(todo);
+      }
     });
     return dueToday;
   };

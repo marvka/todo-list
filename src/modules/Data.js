@@ -25,10 +25,11 @@ export const isEmpty = () => {
 };
 
 export const findProject = (title) => {
-  return projects.find((project) => project.getTitle() === title) ||
-    inbox.getTitle() === title
-    ? inbox
-    : null;
+  let project = projects.find((project) => project.getTitle() === title);
+  if (project) return project;
+  else if (title === "Inbox") {
+    return inbox;
+  }
 };
 
 export const storeInLocalStorage = () => {
@@ -52,7 +53,10 @@ export const retrieveFromLocalStorage = () => {
 export const getTodosDueToday = () => {
   const dueToday = [];
   projects.forEach((project) => {
-    dueToday.push(project.getTodosDueToday());
+    const todos = project.getTodosDueToday();
+    if (todos.length) {
+      dueToday.push(todos);
+    }
   });
   inbox.getTodosDueToday().forEach((todo) => dueToday.push(todo));
   return dueToday;

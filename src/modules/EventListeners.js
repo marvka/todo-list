@@ -1,6 +1,6 @@
 "use strict";
 import * as UI from "./UI";
-import { findProject, getTodosDueToday } from "./Data";
+import * as Data from "./Data";
 import createProject from "./Project";
 
 export const addToSidebar = () => {
@@ -15,21 +15,30 @@ export const addToSidebar = () => {
 
 export const loadDueToday = () => {
   const tempProject = createProject("Today");
-  getTodosDueToday().forEach((todo) => {
+  Data.getTodosDueToday().forEach((todo) => {
     tempProject.addTodo(todo);
   });
   UI.loadProject(tempProject);
 };
 
+export const addNewProject = () => {
+  if (document.querySelector("div#add-project-form")) {
+    const title = document.getElementById("form-title").value;
+    const project = createProject(title);
+    Data.addProject(project);
+    project.getTodos().forEach((todo) => console.log(todo));
+    UI.loadSidebar();
+  }
+};
 export const loadProject = (event) => {
-  const project = findProject(event.target.textContent);
+  const project = Data.findProject(event.target.textContent);
   if (!project) throw "Project not found!";
   UI.loadProject(project);
 };
 
 export const deleteTodo = (event) => {
   const title = event.target.dataset.todoTitle;
-  const project = findProject(event.target.dataset.project);
+  const project = Data.findProject(event.target.dataset.project);
   const currentView = event.target.parentNode.parentNode.firstChild.textContent;
   project.deleteTodo(title);
   if (currentView === "Today") {
