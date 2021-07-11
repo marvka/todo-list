@@ -67,7 +67,7 @@ export const loadSidebar = () => {
   addProject.textContent = "+ Project";
   addProject.id = "add-project";
   addProject.addEventListener("click", EventListeners.loadNewProjectForm);
-  sidebar.appendChild(addProject);
+  sidebarList.appendChild(addProject);
 };
 
 export const clearSideBar = () => {
