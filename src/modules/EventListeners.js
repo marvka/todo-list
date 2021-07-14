@@ -3,6 +3,7 @@ import * as UI from "./UI";
 import * as Data from "./Data";
 import * as Forms from "./Forms";
 import createProject from "./Project";
+import createTodo from "./Todo";
 
 export const addToSidebar = () => {
   const today = document.getElementById("today");
@@ -19,6 +20,11 @@ export const loadNewProjectForm = () => {
   Forms.loadNewProjectForm();
 };
 
+export const loadNewTodoForm = (event) => {
+  Forms.clearForm();
+  Forms.loadNewTodoForm();
+};
+
 export const loadDueToday = () => {
   const tempProject = createProject("Today");
   Data.getTodosDueToday().forEach((todo) => {
@@ -28,16 +34,30 @@ export const loadDueToday = () => {
 };
 
 export const addNewProject = () => {
-  if (document.querySelector("div#form-container")) {
+  if (document.querySelector("div.form-container")) {
     const title = document.getElementById("form-title").value;
     const project = createProject(title);
     Data.addProject(project);
-    project.getTodos().forEach((todo) => console.log(todo));
     UI.loadSidebar();
     Forms.clearForm();
   }
 };
 
+export const addTodo = (event) => {
+  if (document.querySelector("div#form-add-todo")) {
+    const project = Data.findProject(
+      document.querySelector("#active-project-title").textContent
+    );
+    const title = document.querySelector("input#form-title").value;
+    const dueDate = document.querySelector("input#form-dueDate").valueAsDate;
+    const description = document.querySelector("input#form-description").value;
+    const priority = document.querySelector("select#priority-select").value;
+    const note = document.querySelector("textarea#form-note").value;
+    const newTodo = createTodo(title, dueDate, description, priority, note);
+    newTodo.linkToProject(project);
+    project.addTodo(newTodo);
+    UI.loadProject(project);
+    Forms.clearForm();
   }
 };
 

@@ -82,9 +82,16 @@ export const loadProject = (project) => {
   const todoViewContainer = document.getElementById("todo-view-container");
   const heading = document.createElement("h2");
   heading.textContent = project.getTitle();
+  heading.id = "active-project-title";
   todoViewContainer.appendChild(heading);
 
   loadTodos(project);
+  if (project.getTitle() != "Today") {
+    const newTodoButton = document.createElement("button");
+    newTodoButton.textContent = "+ Todo";
+    newTodoButton.addEventListener("click", EventListeners.loadNewTodoForm);
+    todoViewContainer.appendChild(newTodoButton);
+  }
 };
 
 const loadTodos = (project) => {

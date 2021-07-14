@@ -3,7 +3,8 @@ const body = document.querySelector("body");
 
 export const loadNewProjectForm = () => {
   const formContainer = document.createElement("div");
-  formContainer.id = "form-container";
+  formContainer.id = "form-add-project";
+  formContainer.classList.add("form-container");
   body.appendChild(formContainer);
 
   const titleLabel = document.createElement("label");
@@ -28,16 +29,17 @@ export const loadNewProjectForm = () => {
 };
 
 export const clearForm = () => {
-  const formContainer = document.querySelector("div#form-container");
+  const formContainer = document.querySelector("div.form-container");
   if (formContainer) {
     formContainer.remove();
   }
 };
 
 export const loadNewTodoForm = () => {
-  const todoForm = document.createElement("div");
-  todoForm.id = "form-add-todo";
-  body.appendChild(todoForm);
+  const formContainer = document.createElement("div");
+  formContainer.id = "form-add-todo";
+  formContainer.classList.add("form-container");
+  body.appendChild(formContainer);
 
   const titleContainer = document.createElement("div");
   const titleLabel = document.createElement("label");
@@ -48,7 +50,7 @@ export const loadNewTodoForm = () => {
   titleInput.setAttribute("type", "text");
   titleInput.id = "form-title";
   titleContainer.appendChild(titleInput);
-  todoForm.appendChild(titleContainer);
+  formContainer.appendChild(titleContainer);
 
   const descriptionContainer = document.createElement("div");
   const descriptionLabel = document.createElement("label");
@@ -59,7 +61,7 @@ export const loadNewTodoForm = () => {
   descriptionInput.setAttribute("type", "text");
   descriptionInput.id = "form-description";
   descriptionContainer.appendChild(descriptionInput);
-  todoForm.appendChild(descriptionContainer);
+  formContainer.appendChild(descriptionContainer);
 
   const dueDateContainer = document.createElement("div");
   const dueDateLabel = document.createElement("label");
@@ -70,7 +72,7 @@ export const loadNewTodoForm = () => {
   dueDateInput.setAttribute("type", "date");
   dueDateInput.id = "form-dueDate";
   dueDateContainer.appendChild(dueDateInput);
-  todoForm.appendChild(dueDateContainer);
+  formContainer.appendChild(dueDateContainer);
 
   const priorityContainer = document.createElement("div");
   const priorityLabel = document.createElement("label");
@@ -96,7 +98,7 @@ export const loadNewTodoForm = () => {
   highPriority.textContent = "High";
   highPriority.selected;
   selectPriority.appendChild(highPriority);
-  todoForm.appendChild(priorityContainer);
+  formContainer.appendChild(priorityContainer);
 
   const noteContainer = document.createElement("div");
   const noteLabel = document.createElement("label");
@@ -106,17 +108,17 @@ export const loadNewTodoForm = () => {
   const noteTextArea = document.createElement("textarea");
   noteTextArea.id = "form-note";
   noteContainer.appendChild(noteTextArea);
-  todoForm.appendChild(noteContainer);
+  formContainer.appendChild(noteContainer);
 
   const addButton = document.createElement("button");
   addButton.id = "form-add-todo";
   addButton.textContent = "Add";
   addButton.addEventListener("click", EventListeners.addTodo);
-  todoForm.appendChild(addButton);
+  formContainer.appendChild(addButton);
 
   const cancelButton = document.createElement("button");
   cancelButton.id = "form-cancel";
   cancelButton.textContent = "Cancel";
-  cancelButton.addEventListener("click", EventListeners.cancelForm);
-  todoForm.appendChild(cancelButton);
+  cancelButton.addEventListener("click", EventListeners.clearForm);
+  formContainer.appendChild(cancelButton);
 };
