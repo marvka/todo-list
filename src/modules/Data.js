@@ -55,7 +55,7 @@ export const getTodosDueToday = () => {
   projects.forEach((project) => {
     const todos = project.getTodosDueToday();
     if (todos.length) {
-      dueToday.push(todos);
+      todos.forEach((todo) => dueToday.push(todo));
     }
   });
   inbox.getTodosDueToday().forEach((todo) => dueToday.push(todo));
