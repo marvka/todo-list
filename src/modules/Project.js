@@ -7,6 +7,15 @@ const createProject = (title) => {
     const index = todos.findIndex((todo) => todo.getTitle() == title);
     todos.splice(index, 1);
   };
+  const findTodo = (title) => {
+    let matchingTodo;
+    todos.forEach((todo) => {
+      if (todo.getTitle() === title) {
+        matchingTodo = todo;
+      }
+    });
+    return matchingTodo;
+  };
   const getTodos = () => todos;
   const getTodosDueToday = () => {
     const dueToday = [];
@@ -21,7 +30,15 @@ const createProject = (title) => {
     if (!todos.length) return true;
   };
 
-  return { getTitle, addTodo, deleteTodo, getTodos, getTodosDueToday, isEmpty };
+  return {
+    getTitle,
+    addTodo,
+    deleteTodo,
+    findTodo,
+    getTodos,
+    getTodosDueToday,
+    isEmpty,
+  };
 };
 
 export default createProject;
