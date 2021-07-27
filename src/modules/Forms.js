@@ -100,16 +100,6 @@ export const loadNewTodoForm = () => {
   selectPriority.appendChild(highPriority);
   formContainer.appendChild(priorityContainer);
 
-  const noteContainer = document.createElement("div");
-  const noteLabel = document.createElement("label");
-  noteLabel.setAttribute("for", "form-note");
-  noteLabel.textContent = "Note (optional)";
-  noteContainer.appendChild(noteLabel);
-  const noteTextArea = document.createElement("textarea");
-  noteTextArea.id = "form-note";
-  noteContainer.appendChild(noteTextArea);
-  formContainer.appendChild(noteContainer);
-
   const addButton = document.createElement("button");
   addButton.id = "form-add-todo";
   addButton.textContent = "Add";

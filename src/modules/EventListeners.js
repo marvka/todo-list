@@ -52,8 +52,7 @@ export const addTodo = (event) => {
     const dueDate = document.querySelector("input#form-dueDate").valueAsDate;
     const description = document.querySelector("input#form-description").value;
     const priority = document.querySelector("select#priority-select").value;
-    const note = document.querySelector("textarea#form-note").value;
-    const newTodo = createTodo(title, dueDate, description, priority, note);
+    const newTodo = createTodo(title, dueDate, description, priority);
     newTodo.linkToProject(project);
     project.addTodo(newTodo);
     UI.loadProject(project);
