@@ -4,3 +4,7 @@ export const wipeObj = (obj) => {
     delete obj[prop];
   }
 };
+
+export const insertAfter = (referenceNode, newNode) => {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+};
