@@ -72,8 +72,8 @@ export const loadProject = (event) => {
 };
 
 export const deleteTodo = (event) => {
-  const title = event.target.dataset.todoTitle;
-  const project = Data.findProject(event.target.dataset.project);
+  const title = event.target.parentNode.dataset.todoTitle;
+  const project = Data.findProject(event.target.parentNode.dataset.project);
   const currentView = event.target.parentNode.parentNode.firstChild.textContent;
   project.deleteTodo(title);
   if (currentView === "Today") {

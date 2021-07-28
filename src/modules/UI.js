@@ -101,11 +101,11 @@ const loadTodos = (project) => {
   todos.forEach((todo) => {
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo");
+    todoContainer.dataset.project = todo.getLinkedProject().getTitle();
+    todoContainer.dataset.todoTitle = todo.getTitle();
 
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
-    todoCheckbox.dataset.project = todo.getLinkedProject().getTitle();
-    todoCheckbox.dataset.todoTitle = todo.getTitle();
     todoCheckbox.classList.add("delete-todo");
     todoCheckbox.addEventListener("click", EventListeners.deleteTodo);
     todoContainer.appendChild(todoCheckbox);
