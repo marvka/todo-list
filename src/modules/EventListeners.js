@@ -61,6 +61,30 @@ export const addTodo = (event) => {
   }
 };
 
+export const loadTodoDetails = (event) => {
+  const project = Data.findProject(event.target.parentNode.dataset.project);
+  const todoContainer = event.target.parentNode;
+  const todo = project.findTodo(event.target.parentNode.dataset.todoTitle);
+
+  const detailDiv = document.createElement("div");
+  const descriptionContainer = document.createElement("div");
+  descriptionContainer.classList = "description-container";
+  const descriptionEditButton = document.createElement("button");
+  descriptionEditButton.textContent = "Edit";
+  descriptionEditButton.addEventListener("click", editTodoDescription);
+  const descriptionDiv = document.createElement("div");
+  descriptionDiv.textContent = todo.getDescription() || "No Description";
+
+  insertAfter(todoContainer, detailDiv);
+  detailDiv.appendChild(descriptionContainer);
+  descriptionContainer.appendChild(descriptionEditButton);
+  descriptionContainer.appendChild(descriptionDiv);
+};
+
+export const editTodoDescription = (event) => {
+  //TODO: Implement description editing
+};
+
 export const clearForm = () => {
   Forms.clearForm();
 };

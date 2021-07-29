@@ -112,6 +112,7 @@ const loadTodos = (project) => {
 
     const todoTitle = document.createElement("div");
     todoTitle.textContent = todo.getTitle();
+    todoTitle.addEventListener("click", EventListeners.loadTodoDetails);
     todoContainer.appendChild(todoTitle);
 
     const todoDueDate = document.createElement("div");
