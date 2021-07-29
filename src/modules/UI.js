@@ -102,7 +102,7 @@ const loadTodos = (project) => {
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo");
     todoContainer.dataset.project = todo.getLinkedProject().getTitle();
-    todoContainer.dataset.todoTitle = todo.getTitle();
+    todoContainer.dataset.todo = todo.getTitle();
 
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";

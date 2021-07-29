@@ -64,11 +64,13 @@ export const addTodo = (event) => {
 export const loadTodoDetails = (event) => {
   const project = Data.findProject(event.target.parentNode.dataset.project);
   const todoContainer = event.target.parentNode;
-  const todo = project.findTodo(event.target.parentNode.dataset.todoTitle);
+  const todo = project.findTodo(event.target.parentNode.dataset.todo);
 
   const detailDiv = document.createElement("div");
   const descriptionContainer = document.createElement("div");
   descriptionContainer.classList = "description-container";
+  descriptionContainer.dataset.project = project.getTitle();
+  descriptionContainer.dataset.todo = todo.getTitle();
   const descriptionEditButton = document.createElement("button");
   descriptionEditButton.textContent = "Edit";
   descriptionEditButton.addEventListener("click", editTodoDescription);
@@ -96,7 +98,7 @@ export const loadProject = (event) => {
 };
 
 export const deleteTodo = (event) => {
-  const title = event.target.parentNode.dataset.todoTitle;
+  const title = event.target.parentNode.dataset.todo;
   const project = Data.findProject(event.target.parentNode.dataset.project);
   const currentView = event.target.parentNode.parentNode.firstChild.textContent;
   project.deleteTodo(title);
