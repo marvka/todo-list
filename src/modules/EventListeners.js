@@ -60,7 +60,7 @@ export const addTodo = (event) => {
   }
 };
 
-export const loadTodoDetails = (event) => {
+export const loadTodoDescription = (event) => {
   const project = Data.findProject(event.target.parentNode.dataset.project);
   const todoContainer = event.target.parentNode;
   const todo = project.findTodo(event.target.parentNode.dataset.todo);
