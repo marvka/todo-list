@@ -4,6 +4,7 @@ import * as Data from "./Data";
 import * as EventListeners from "./EventListeners";
 import * as Forms from "./Forms.js";
 import formatISO from "date-fns/formatISO";
+import { insertAfter } from "./Helper";
 
 const body = document.querySelector("body");
 
@@ -129,4 +130,27 @@ const loadTodos = (project) => {
 const unloadTodoView = () => {
   const todoViewContainer = document.getElementById("todo-view-container");
   if (todoViewContainer) todoViewContainer.innerHTML = "";
+};
+
+export const loadTodoDetails = (todoContainer, project, todo) => {
+  const detailDiv = document.createElement("div");
+  const descriptionContainer =
+    document.getElementById("description-container") ||
+    document.createElement("div");
+  descriptionContainer.id = "description-container";
+  descriptionContainer.dataset.project = project.getTitle();
+  descriptionContainer.dataset.todo = todo.getTitle();
+  const descriptionEditButton = document.createElement("button");
+  descriptionEditButton.textContent = "Edit";
+  descriptionEditButton.addEventListener(
+    "click",
+    EventListeners.editTodoDescription
+  );
+  const descriptionDiv = document.createElement("div");
+  descriptionDiv.textContent = todo.getDescription() || "No Description";
+
+  insertAfter(todoContainer, detailDiv);
+  detailDiv.appendChild(descriptionContainer);
+  descriptionContainer.appendChild(descriptionEditButton);
+  descriptionContainer.appendChild(descriptionDiv);
 };

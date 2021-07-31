@@ -65,42 +65,40 @@ export const loadTodoDetails = (event) => {
   const project = Data.findProject(event.target.parentNode.dataset.project);
   const todoContainer = event.target.parentNode;
   const todo = project.findTodo(event.target.parentNode.dataset.todo);
-
-  const detailDiv = document.createElement("div");
-  const descriptionContainer = document.createElement("div");
-  descriptionContainer.classList = "description-container";
-  descriptionContainer.dataset.project = project.getTitle();
-  descriptionContainer.dataset.todo = todo.getTitle();
-  const descriptionEditButton = document.createElement("button");
-  descriptionEditButton.textContent = "Edit";
-  descriptionEditButton.addEventListener("click", editTodoDescription);
-  const descriptionDiv = document.createElement("div");
-  descriptionDiv.textContent = todo.getDescription() || "No Description";
-
-  insertAfter(todoContainer, detailDiv);
-  detailDiv.appendChild(descriptionContainer);
-  descriptionContainer.appendChild(descriptionEditButton);
-  descriptionContainer.appendChild(descriptionDiv);
+  UI.loadTodoDetails(todoContainer, project, todo);
 };
 
 export const editTodoDescription = (event) => {
-  //TODO: Add submit button and functionality
   const project = Data.findProject(event.target.parentNode.dataset.project);
   const todo = project.findTodo(event.target.parentNode.dataset.todo);
-  const descriptionContainer = event.target.parentNode;
+  const descriptionContainer = document.getElementById("description-container");
   descriptionContainer.innerHTML = "";
 
-  const descriptionEditContainer = document.createElement("div");
   const descriptionEditLabel = document.createElement("label");
-  descriptionEditLabel.setAttribute("for", "edit-description");
+  descriptionEditLabel.setAttribute("for", "edit-description-textbox");
   const descriptionEditTextbox = document.createElement("input");
-  descriptionEditTextbox.id = "edit-description";
+  descriptionEditTextbox.id = "edit-description-textbox";
   descriptionEditTextbox.setAttribute("type", "text");
   descriptionEditTextbox.setAttribute("value", todo.getDescription() || "");
+  const descriptionSubmitButton = document.createElement("button");
+  descriptionSubmitButton.textContent = "Submit";
+  descriptionSubmitButton.addEventListener("click", submitNewDescription);
 
-  descriptionContainer.appendChild(descriptionEditContainer);
-  descriptionEditContainer.appendChild(descriptionEditLabel);
-  descriptionEditContainer.appendChild(descriptionEditTextbox);
+  descriptionContainer.appendChild(descriptionEditLabel);
+  descriptionContainer.appendChild(descriptionEditTextbox);
+  descriptionContainer.appendChild(descriptionSubmitButton);
+};
+
+const submitNewDescription = (event) => {
+  const project = Data.findProject(event.target.parentNode.dataset.project);
+  const todo = project.findTodo(event.target.parentNode.dataset.todo);
+  const descriptionContainer = document.getElementById("description-container");
+  const newDescription = document.getElementById(
+    "edit-description-textbox"
+  ).value;
+  todo.setDescription(newDescription);
+  descriptionContainer.innerHTML = "";
+  UI.loadTodoDetails(descriptionContainer, project, todo);
 };
 
 export const clearForm = () => {

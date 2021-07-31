@@ -37,6 +37,6 @@ nav,
   margin-left: auto;
 }
 
-.description-container {
+#description-container {
   display: flex;
 }
