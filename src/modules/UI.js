@@ -136,6 +136,9 @@ export const loadTodoDetails = (todoContainer, project, todo) => {
   const descriptionContainer =
     document.getElementById("description-container") ||
     document.createElement("div");
+  if (descriptionContainer.hasChildNodes()) {
+    descriptionContainer.innerHTML = "";
+  }
   descriptionContainer.id = "description-container";
   descriptionContainer.dataset.project = project.getTitle();
   descriptionContainer.dataset.todo = todo.getTitle();
