@@ -84,7 +84,23 @@ export const loadTodoDetails = (event) => {
 };
 
 export const editTodoDescription = (event) => {
-  //TODO: Implement description editing
+  //TODO: Add submit button and functionality
+  const project = Data.findProject(event.target.parentNode.dataset.project);
+  const todo = project.findTodo(event.target.parentNode.dataset.todo);
+  const descriptionContainer = event.target.parentNode;
+  descriptionContainer.innerHTML = "";
+
+  const descriptionEditContainer = document.createElement("div");
+  const descriptionEditLabel = document.createElement("label");
+  descriptionEditLabel.setAttribute("for", "edit-description");
+  const descriptionEditTextbox = document.createElement("input");
+  descriptionEditTextbox.id = "edit-description";
+  descriptionEditTextbox.setAttribute("type", "text");
+  descriptionEditTextbox.setAttribute("value", todo.getDescription() || "");
+
+  descriptionContainer.appendChild(descriptionEditContainer);
+  descriptionEditContainer.appendChild(descriptionEditLabel);
+  descriptionEditContainer.appendChild(descriptionEditTextbox);
 };
 
 export const clearForm = () => {
