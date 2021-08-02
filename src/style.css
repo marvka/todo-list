@@ -40,3 +40,8 @@ nav,
 #description-container {
   display: flex;
 }
+
+.description-edit-button {
+  max-height: 1rem;
+  max-width: 1rem;
+}

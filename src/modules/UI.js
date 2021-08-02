@@ -145,6 +145,7 @@ export const loadTodoDetails = (todoContainer, project, todo) => {
   descriptionContainer.dataset.project = project.getTitle();
   descriptionContainer.dataset.todo = todo.getTitle();
   const descriptionEditButton = new Image();
+  descriptionEditButton.classList.add("description-edit-button");
   descriptionEditButton.src = descriptionEditSvg;
   descriptionEditButton.addEventListener(
     "click",
