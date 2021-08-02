@@ -4,6 +4,7 @@ import * as Data from "./Data";
 import * as EventListeners from "./EventListeners";
 import formatISO from "date-fns/formatISO";
 import { insertAfter } from "./Helper";
+import descriptionEditSvg from "../assets/edit-regular.svg";
 
 const body = document.querySelector("body");
 
@@ -132,6 +133,7 @@ const unloadTodoView = () => {
 };
 
 export const loadTodoDetails = (todoContainer, project, todo) => {
+  console.log(descriptionEditSvg);
   const detailDiv = document.createElement("div");
   const descriptionContainer =
     document.getElementById("description-container") ||
@@ -142,12 +144,13 @@ export const loadTodoDetails = (todoContainer, project, todo) => {
   descriptionContainer.id = "description-container";
   descriptionContainer.dataset.project = project.getTitle();
   descriptionContainer.dataset.todo = todo.getTitle();
-  const descriptionEditButton = document.createElement("button");
-  descriptionEditButton.textContent = "Edit";
+  const descriptionEditButton = new Image();
+  descriptionEditButton.src = descriptionEditSvg;
   descriptionEditButton.addEventListener(
     "click",
     EventListeners.editTodoDescription
   );
+
   const descriptionDiv = document.createElement("div");
   descriptionDiv.textContent = todo.getDescription() || "No Description";
 
