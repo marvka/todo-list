@@ -18,13 +18,7 @@ const createProject = (title) => {
   };
   const getTodos = () => todos;
   const getTodosDueToday = () => {
-    const dueToday = [];
-    todos.forEach((todo) => {
-      if (todo.isDueToday()) {
-        dueToday.push(todo);
-      }
-    });
-    return dueToday;
+    return todos.filter((todo) => todo.isDueToday());
   };
   const isEmpty = () => {
     if (!todos.length) return true;

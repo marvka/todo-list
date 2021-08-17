@@ -1,12 +1,5 @@
 "use strict";
-import { wipeObj } from "./Helper";
-
-const inbox = {}; // Inbox "project"
 const projects = []; // User defined projects
-
-export const setInbox = (project) => {
-  Object.assign(inbox, project);
-};
 
 export const addProject = (project) => {
   projects.push(project);
@@ -16,39 +9,18 @@ export const getProjects = () => {
   return projects;
 };
 
-export const getInboxTodos = () => {
-  return inbox.getTodos();
-};
-
 export const isEmpty = () => {
-  if (!projects.length && !inbox.getTodos().length) return true;
+  if (!projects.length) return true;
 };
 
 export const findProject = (title) => {
   let project = projects.find((project) => project.getTitle() === title);
   if (project) return project;
-  else if (title === "Inbox") {
-    return inbox;
-  }
 };
 
-export const storeInLocalStorage = () => {
-  localStorage.setItem("inbox", JSON.stringify(inbox));
-  localStorage.setItem("projects", JSON.stringify(projects));
-};
+export const storeInLocalStorage = () => {};
 
-export const retrieveFromLocalStorage = () => {
-  if (JSON.parse(localStorage.getItem("projects"))) {
-    projects.length = 0;
-    JSON.parse(localStorage.getItem("projects")).forEach((project) =>
-      projects.push(project)
-    );
-  }
-  if (JSON.parse(localStorage.getItem("inbox"))) {
-    wipeObj(inbox);
-    setInbox(inbox, JSON.parse(localStorage.getItem("inbox")));
-  }
-};
+export const retrieveFromLocalStorage = () => {};
 
 export const getTodosDueToday = () => {
   const dueToday = [];
@@ -58,6 +30,9 @@ export const getTodosDueToday = () => {
       todos.forEach((todo) => dueToday.push(todo));
     }
   });
-  inbox.getTodosDueToday().forEach((todo) => dueToday.push(todo));
   return dueToday;
+};
+
+export const getProjectsWithTodosDueToday = () => {
+  const _projects = projects.filter((project) => project.hasTodos);
 };

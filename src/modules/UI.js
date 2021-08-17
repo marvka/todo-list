@@ -43,25 +43,23 @@ export const loadSidebar = () => {
   sidebarList.id = "projects";
   sidebar.appendChild(sidebarList);
 
-  const inbox = document.createElement("li");
-  inbox.id = "inbox";
-  inbox.textContent = "Inbox";
-  inbox.addEventListener("click", EventListeners.loadProject);
-  sidebarList.appendChild(inbox);
-
   const today = document.createElement("li");
   today.id = "today";
   today.textContent = "Today";
-  today.addEventListener("click", EventListeners.loadDueToday);
+  today.addEventListener("click", EventListeners.loadTodosDueToday);
   sidebarList.appendChild(today);
 
   Data.getProjects().forEach((project) => {
     const projectElement = document.createElement("li");
     projectElement.textContent = project.getTitle();
+    projectElement.id = project.getTitle();
     projectElement.classList.add("project");
     projectElement.addEventListener("click", EventListeners.loadProject);
     sidebarList.appendChild(projectElement);
   });
+
+  const inbox = document.querySelector("#Inbox");
+  today.before(inbox);
 
   const addProject = document.createElement("li");
   addProject.textContent = "+ Project";
@@ -78,13 +76,10 @@ export const clearSideBar = () => {
 };
 
 export const loadProject = (project) => {
-  unloadTodoView();
   const todoViewContainer = document.getElementById("todo-view-container");
-  const heading = document.createElement("h2");
-  heading.textContent = project.getTitle();
-  heading.id = "active-project-title";
-  todoViewContainer.appendChild(heading);
 
+  unloadTodoView();
+  loadHeading(project.getTitle());
   loadTodos(project);
   if (project.getTitle() != "Today") {
     const newTodoButton = document.createElement("button");
@@ -94,6 +89,20 @@ export const loadProject = (project) => {
   }
 };
 
+export const loadHeading = (title) => {
+  const todoViewContainer = document.getElementById("todo-view-container");
+  const heading = document.createElement("h2");
+  heading.textContent = title;
+  heading.id = "active-project-title";
+  todoViewContainer.appendChild(heading);
+};
+
+export const loadTodosDueToday = (projectArr) => {
+  unloadTodoView();
+  loadHeading("Today");
+  projectArr.forEach((project) => loadTodos(project));
+};
+
 const loadTodos = (project) => {
   const todoViewContainer = document.getElementById("todo-view-container");
   const todos = project.getTodos();
@@ -101,8 +110,8 @@ const loadTodos = (project) => {
   todos.forEach((todo) => {
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo");
-    todoContainer.dataset.project = todo.getLinkedProject().getTitle();
     todoContainer.dataset.todo = todo.getTitle();
+    todoContainer.dataset.project = project.getTitle();
 
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
@@ -132,7 +141,6 @@ const unloadTodoView = () => {
 };
 
 export const loadTodoDetails = (todoContainer, project, todo) => {
-  console.log(descriptionEditSvg);
   const detailDiv = document.createElement("div");
   const descriptionContainer =
     document.getElementById("description-container") ||

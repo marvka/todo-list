@@ -16,13 +16,11 @@ const populateDefaultData = () => {
   if (!Data.getProjects().length) {
     const inbox = createProject("Inbox");
     const greetingTodo = createTodo("This is a todo");
-    greetingTodo.linkToProject(inbox);
     inbox.addTodo(greetingTodo);
     const helpTodo = createTodo(
       "Feel free to add your own projects and todos!"
     );
-    helpTodo.linkToProject(inbox);
     inbox.addTodo(helpTodo);
-    Data.setInbox(inbox);
+    Data.addProject(inbox);
   }
 };

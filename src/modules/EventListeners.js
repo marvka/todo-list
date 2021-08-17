@@ -7,7 +7,7 @@ import createTodo from "./Todo";
 
 export const addToSidebar = () => {
   const today = document.getElementById("today");
-  today.addEventListener("click", loadDueToday);
+  today.addEventListener("click", loadTodosDueToday);
 
   const projectListItems = document.querySelectorAll(".project");
   projectListItems.forEach((projectListItem) => {
@@ -25,12 +25,12 @@ export const loadNewTodoForm = (event) => {
   Forms.loadNewTodoForm();
 };
 
-export const loadDueToday = () => {
-  const tempProject = createProject("Today");
-  Data.getTodosDueToday().forEach((todo) => {
-    tempProject.addTodo(todo);
-  });
-  UI.loadProject(tempProject);
+export const loadTodosDueToday = () => {
+  UI.loadTodosDueToday(
+    Data.getProjects().filter(
+      (project) => project.getTodosDueToday().length > 0
+    )
+  );
 };
 
 export const addNewProject = () => {
@@ -53,7 +53,6 @@ export const addTodo = (event) => {
     const description = document.querySelector("input#form-description").value;
     const priority = document.querySelector("select#priority-select").value;
     const newTodo = createTodo(title, dueDate, description, priority);
-    newTodo.linkToProject(project);
     project.addTodo(newTodo);
     UI.loadProject(project);
     Forms.clearForm();
@@ -116,7 +115,7 @@ export const deleteTodo = (event) => {
   const currentView = event.target.parentNode.parentNode.firstChild.textContent;
   project.deleteTodo(title);
   if (currentView === "Today") {
-    loadDueToday();
+    loadTodosDueToday();
   } else {
     UI.loadProject(project);
   }
