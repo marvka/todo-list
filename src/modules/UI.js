@@ -3,7 +3,6 @@
 import * as Data from "./Data";
 import * as EventListeners from "./EventListeners";
 import formatISO from "date-fns/formatISO";
-import { insertAfter } from "./Helper";
 import descriptionEditSvg from "../assets/edit-regular.svg";
 
 const body = document.querySelector("body");
@@ -155,7 +154,7 @@ export const loadTodoDetails = (todoContainer, project, todo) => {
   const descriptionDiv = document.createElement("div");
   descriptionDiv.textContent = todo.getDescription() || "No Description";
 
-  insertAfter(todoContainer, detailDiv);
+  todoContainer.after(detailDiv);
   detailDiv.appendChild(descriptionContainer);
   descriptionContainer.appendChild(descriptionEditButton);
   descriptionContainer.appendChild(descriptionDiv);
