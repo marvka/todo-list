@@ -9,6 +9,14 @@ const createTodo = (title, dueDate = endOfToday(), description, priority) => {
   const setDescription = (newDescription) => (description = newDescription);
   const getPriority = () => priority;
   const isDueToday = () => isToday(dueDate);
+  const getPlain = () => {
+    return {
+      title,
+      dueDate,
+      description,
+      priority,
+    };
+  };
 
   return {
     getTitle,
@@ -17,6 +25,7 @@ const createTodo = (title, dueDate = endOfToday(), description, priority) => {
     setDescription,
     getPriority,
     isDueToday,
+    getPlain,
   };
 };
 export default createTodo;

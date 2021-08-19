@@ -5,8 +5,9 @@ import createProject from "./Project";
 import createTodo from "./Todo";
 
 export const initialize = () => {
-  Data.retrieveFromLocalStorage();
-  if (!Data.getProjects().length) {
+  if (localStorage.length) {
+    Data.retrieveDataFromLocalStorage();
+  } else {
     populateDefaultData();
   }
   UI.initialize();

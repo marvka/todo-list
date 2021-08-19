@@ -38,6 +38,7 @@ export const addNewProject = () => {
     const title = document.getElementById("form-title").value;
     const project = createProject(title);
     Data.addProject(project);
+    Data.storeDataInLocalStorage();
     UI.loadSidebar();
     Forms.clearForm();
   }
@@ -54,6 +55,7 @@ export const addTodo = (event) => {
     const priority = document.querySelector("select#priority-select").value;
     const newTodo = createTodo(title, dueDate, description, priority);
     project.addTodo(newTodo);
+    Data.storeDataInLocalStorage();
     UI.loadProject(project);
     Forms.clearForm();
   }
@@ -95,6 +97,7 @@ const submitNewDescription = (event) => {
     "edit-description-textbox"
   ).value;
   todo.setDescription(newDescription);
+  Data.storeDataInLocalStorage();
   descriptionContainer.innerHTML = "";
   UI.loadTodoDetails(descriptionContainer, project, todo);
 };
