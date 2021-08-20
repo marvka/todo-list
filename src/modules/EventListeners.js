@@ -5,16 +5,6 @@ import * as Forms from "./Forms";
 import createProject from "./Project";
 import createTodo from "./Todo";
 
-export const addToSidebar = () => {
-  const today = document.getElementById("today");
-  today.addEventListener("click", loadTodosDueToday);
-
-  const projectListItems = document.querySelectorAll(".project");
-  projectListItems.forEach((projectListItem) => {
-    projectListItem.addEventListener("click", projectLoadEventListener);
-  });
-};
-
 export const loadNewProjectForm = () => {
   Forms.clearForm();
   Forms.loadNewProjectForm();
