@@ -16,11 +16,10 @@ export const loadNewTodoForm = (event) => {
 };
 
 export const loadTodosDueToday = () => {
-  UI.loadTodosDueToday(
-    Data.getProjects().filter(
-      (project) => project.getTodosDueToday().length > 0
-    )
+  const projectsWithTodosDueToday = Data.getProjects().filter(
+    (project) => project.getTodosDueToday().length > 0
   );
+  UI.loadTodosDueToday(projectsWithTodosDueToday);
 };
 
 export const addNewProject = () => {

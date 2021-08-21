@@ -80,7 +80,7 @@ export const loadProject = (project) => {
 
   unloadTodoView();
   loadHeading(project.getTitle());
-  loadTodos(project);
+  loadTodos(project.getTitle(), project.getTodos());
   if (project.getTitle() != "Today") {
     const newTodoButton = document.createElement("button");
     newTodoButton.textContent = "+ Todo";
@@ -97,21 +97,25 @@ export const loadHeading = (title) => {
   todoViewContainer.appendChild(heading);
 };
 
-export const loadTodosDueToday = (projectArr) => {
+export const loadTodosDueToday = (projectsWithTodosDueToday) => {
   unloadTodoView();
   loadHeading("Today");
-  projectArr.forEach((project) => loadTodos(project));
+  projectsWithTodosDueToday.forEach((project) => {
+    const todos = project.getTodos().filter((todo) => todo.isDueToday());
+    loadTodos(project.getTitle(), todos);
+  });
 };
 
-const loadTodos = (project) => {
+const loadTodos = (projectTitle, todos) => {
   const todoViewContainer = document.getElementById("todo-view-container");
-  const todos = project.getTodos();
 
   todos.forEach((todo) => {
+    const todoTitle = todo.getTitle();
+
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo");
-    todoContainer.dataset.todo = todo.getTitle();
-    todoContainer.dataset.project = project.getTitle();
+    todoContainer.dataset.todo = todoTitle;
+    todoContainer.dataset.project = projectTitle;
 
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
@@ -119,10 +123,10 @@ const loadTodos = (project) => {
     todoCheckbox.addEventListener("click", EventListeners.deleteTodo);
     todoContainer.appendChild(todoCheckbox);
 
-    const todoTitle = document.createElement("div");
-    todoTitle.textContent = todo.getTitle();
-    todoTitle.addEventListener("click", EventListeners.loadTodoDescription);
-    todoContainer.appendChild(todoTitle);
+    const todoTitleDiv = document.createElement("div");
+    todoTitleDiv.textContent = todoTitle;
+    todoTitleDiv.addEventListener("click", EventListeners.loadTodoDescription);
+    todoContainer.appendChild(todoTitleDiv);
 
     const todoDueDate = document.createElement("div");
     todoDueDate.classList.add("due-date");
