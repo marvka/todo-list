@@ -110,33 +110,39 @@ const loadTodos = (projectTitle, todos) => {
   const todoViewContainer = document.getElementById("todo-view-container");
 
   todos.forEach((todo) => {
-    const todoTitle = todo.getTitle();
-
-    const todoContainer = document.createElement("div");
-    todoContainer.classList.add("todo");
-    todoContainer.dataset.todo = todoTitle;
-    todoContainer.dataset.project = projectTitle;
-
-    const todoCheckbox = document.createElement("input");
-    todoCheckbox.type = "checkbox";
-    todoCheckbox.classList.add("delete-todo");
-    todoCheckbox.addEventListener("click", EventListeners.deleteTodo);
-    todoContainer.appendChild(todoCheckbox);
-
-    const todoTitleDiv = document.createElement("div");
-    todoTitleDiv.textContent = todoTitle;
-    todoTitleDiv.addEventListener("click", EventListeners.loadTodoDescription);
-    todoContainer.appendChild(todoTitleDiv);
-
-    const todoDueDate = document.createElement("div");
-    todoDueDate.classList.add("due-date");
-    todoDueDate.textContent = formatISO(todo.getDueDate(), {
-      representation: "date",
-    });
-    todoContainer.appendChild(todoDueDate);
-
+    const todoContainer = loadTodo(projectTitle, todo);
     todoViewContainer.appendChild(todoContainer);
   });
+};
+
+const loadTodo = (projectTitle, todo) => {
+  const todoTitle = todo.getTitle();
+
+  const todoContainer = document.createElement("div");
+  todoContainer.classList.add("todo");
+  todoContainer.dataset.todo = todoTitle;
+  todoContainer.dataset.project = projectTitle;
+
+  const todoCheckbox = document.createElement("input");
+  todoCheckbox.type = "checkbox";
+  todoCheckbox.classList.add("delete-todo");
+  todoCheckbox.addEventListener("click", EventListeners.deleteTodo);
+  todoContainer.appendChild(todoCheckbox);
+
+  const todoTitleDiv = document.createElement("div");
+  todoTitleDiv.textContent = todoTitle;
+  todoTitleDiv.addEventListener("click", EventListeners.loadTodoDescription);
+  todoContainer.appendChild(todoTitleDiv);
+
+  const todoDueDate = document.createElement("div");
+  todoDueDate.classList.add("due-date");
+  todoDueDate.textContent = formatISO(todo.getDueDate(), {
+    representation: "date",
+  });
+  todoDueDate.addEventListener("click", EventListeners.editDueDate);
+  todoContainer.appendChild(todoDueDate);
+
+  return todoContainer;
 };
 
 const unloadTodoView = () => {
@@ -170,4 +176,9 @@ export const loadTodoDetails = (todoContainer, project, todo) => {
   detailDiv.appendChild(descriptionContainer);
   descriptionContainer.appendChild(descriptionEditButton);
   descriptionContainer.appendChild(descriptionDiv);
+};
+
+export const reloadTodo = (todoContainer, projectTitle, todo) => {
+  const newTodoContainer = loadTodo(projectTitle, todo);
+  todoContainer.replaceWith(newTodoContainer);
 };

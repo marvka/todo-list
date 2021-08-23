@@ -5,6 +5,7 @@ import isToday from "date-fns/isToday";
 const createTodo = (title, dueDate = endOfToday(), description, priority) => {
   const getTitle = () => title;
   const getDueDate = () => dueDate;
+  const setDueDate = (newDueDate) => (dueDate = newDueDate);
   const getDescription = () => description;
   const setDescription = (newDescription) => (description = newDescription);
   const getPriority = () => priority;
@@ -21,6 +22,7 @@ const createTodo = (title, dueDate = endOfToday(), description, priority) => {
   return {
     getTitle,
     getDueDate,
+    setDueDate,
     getDescription,
     setDescription,
     getPriority,

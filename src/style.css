@@ -33,7 +33,8 @@ nav,
   display: flex;
 }
 
-div.due-date {
+div.due-date,
+input#change-due-date {
   margin-left: auto;
   margin-right: 0.5em;
 }

@@ -4,6 +4,7 @@ import * as Data from "./Data";
 import * as Forms from "./Forms";
 import createProject from "./Project";
 import createTodo from "./Todo";
+import parseISO from "date-fns/parseISO";
 
 export const loadNewProjectForm = () => {
   Forms.clearForm();
@@ -76,6 +77,44 @@ export const editTodoDescription = (event) => {
   descriptionContainer.appendChild(descriptionEditLabel);
   descriptionContainer.appendChild(descriptionEditTextbox);
   descriptionContainer.appendChild(descriptionSubmitButton);
+};
+
+export const editDueDate = (event) => {
+  if (document.querySelector("#change-due-date")) {
+    const todoDivWithOpenCalendar =
+      document.querySelector("#change-due-date").parentNode;
+    const projectTitle = todoDivWithOpenCalendar.dataset.project;
+    const project = Data.findProject(projectTitle);
+    const todo = project.findTodo(todoDivWithOpenCalendar.dataset.todo);
+    UI.reloadTodo(todoDivWithOpenCalendar, projectTitle, todo);
+  }
+
+  const todoContainer = event.target.parentNode;
+  const todoDueDateDiv = event.target;
+
+  const calendar = document.createElement("input");
+  calendar.setAttribute("type", "date");
+  calendar.id = "change-due-date";
+  calendar.value = todoDueDateDiv.textContent;
+
+  const submitButton = document.createElement("button");
+  submitButton.id = "submit-due-date";
+  submitButton.textContent = "Submit";
+  submitButton.addEventListener("click", submitNewDueDate);
+
+  todoDueDateDiv.remove();
+  todoContainer.appendChild(calendar);
+  todoContainer.appendChild(submitButton);
+};
+
+const submitNewDueDate = (event) => {
+  const calendar = document.querySelector("#change-due-date");
+  const newDueDate = parseISO(calendar.value);
+  const projectTitle = event.target.parentNode.dataset.project;
+  const project = Data.findProject(projectTitle);
+  const todo = project.findTodo(event.target.parentNode.dataset.todo);
+  todo.setDueDate(newDueDate);
+  UI.reloadTodo(event.target.parentNode, projectTitle, todo);
 };
 
 const submitNewDescription = (event) => {
