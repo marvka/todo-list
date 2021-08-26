@@ -51,11 +51,19 @@ export const addTodo = (event) => {
   }
 };
 
-export const loadTodoDescription = (event) => {
+export const toggleTodoDescription = (event) => {
+  const button = event.target;
   const project = Data.findProject(event.target.parentNode.dataset.project);
   const todoContainer = event.target.parentNode;
   const todo = project.findTodo(event.target.parentNode.dataset.todo);
-  UI.loadTodoDetails(todoContainer, project, todo);
+
+  if (document.querySelector("#description-container")) {
+    UI.unloadTodoDescription();
+    button.textContent = "+";
+  } else {
+    UI.loadTodoDescription(todoContainer, project, todo);
+    button.textContent = "-";
+  }
 };
 
 export const editTodoDescription = (event) => {
@@ -127,7 +135,7 @@ const submitNewDescription = (event) => {
   todo.setDescription(newDescription);
   Data.storeDataInLocalStorage();
   descriptionContainer.innerHTML = "";
-  UI.loadTodoDetails(descriptionContainer, project, todo);
+  UI.loadTodoDescription(descriptionContainer, project, todo);
 };
 
 export const clearForm = () => {

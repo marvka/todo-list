@@ -3,7 +3,7 @@
 import * as Data from "./Data";
 import * as EventListeners from "./EventListeners";
 import formatISO from "date-fns/formatISO";
-import descriptionEditSvg from "../assets/edit-regular.svg";
+import editingSVG from "../assets/edit-regular.svg";
 
 const body = document.querySelector("body");
 
@@ -123,6 +123,15 @@ const loadTodo = (projectTitle, todo) => {
   todoContainer.dataset.todo = todoTitle;
   todoContainer.dataset.project = projectTitle;
 
+  const descriptionToggleButton = document.createElement("button");
+  descriptionToggleButton.classList.add("show-description");
+  descriptionToggleButton.addEventListener(
+    "click",
+    EventListeners.toggleTodoDescription
+  );
+  descriptionToggleButton.textContent = "+";
+  todoContainer.appendChild(descriptionToggleButton);
+
   const todoCheckbox = document.createElement("input");
   todoCheckbox.type = "checkbox";
   todoCheckbox.classList.add("delete-todo");
@@ -131,7 +140,6 @@ const loadTodo = (projectTitle, todo) => {
 
   const todoTitleDiv = document.createElement("div");
   todoTitleDiv.textContent = todoTitle;
-  todoTitleDiv.addEventListener("click", EventListeners.loadTodoDescription);
   todoContainer.appendChild(todoTitleDiv);
 
   const todoDueDate = document.createElement("div");
@@ -150,7 +158,7 @@ const unloadTodoView = () => {
   if (todoViewContainer) todoViewContainer.innerHTML = "";
 };
 
-export const loadTodoDetails = (todoContainer, project, todo) => {
+export const loadTodoDescription = (todoContainer, project, todo) => {
   const detailDiv = document.createElement("div");
   const descriptionContainer =
     document.getElementById("description-container") ||
@@ -163,7 +171,7 @@ export const loadTodoDetails = (todoContainer, project, todo) => {
   descriptionContainer.dataset.todo = todo.getTitle();
   const descriptionEditButton = new Image();
   descriptionEditButton.classList.add("description-edit-button");
-  descriptionEditButton.src = descriptionEditSvg;
+  descriptionEditButton.src = editingSVG;
   descriptionEditButton.addEventListener(
     "click",
     EventListeners.editTodoDescription
@@ -176,6 +184,11 @@ export const loadTodoDetails = (todoContainer, project, todo) => {
   detailDiv.appendChild(descriptionContainer);
   descriptionContainer.appendChild(descriptionEditButton);
   descriptionContainer.appendChild(descriptionDiv);
+};
+
+export const unloadTodoDescription = (event) => {
+  const descriptionContainer = document.querySelector("#description-container");
+  descriptionContainer.remove();
 };
 
 export const reloadTodo = (todoContainer, projectTitle, todo) => {
