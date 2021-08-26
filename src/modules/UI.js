@@ -159,7 +159,6 @@ const unloadTodoView = () => {
 };
 
 export const loadTodoDescription = (todoContainer, project, todo) => {
-  const detailDiv = document.createElement("div");
   const descriptionContainer =
     document.getElementById("description-container") ||
     document.createElement("div");
@@ -180,8 +179,7 @@ export const loadTodoDescription = (todoContainer, project, todo) => {
   const descriptionDiv = document.createElement("div");
   descriptionDiv.textContent = todo.getDescription() || "No Description";
 
-  todoContainer.after(detailDiv);
-  detailDiv.appendChild(descriptionContainer);
+  todoContainer.after(descriptionContainer);
   descriptionContainer.appendChild(descriptionEditButton);
   descriptionContainer.appendChild(descriptionDiv);
 };
