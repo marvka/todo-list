@@ -147,7 +147,6 @@ const loadTodo = (projectTitle, todo) => {
   todoDueDate.textContent = formatISO(todo.getDueDate(), {
     representation: "date",
   });
-  todoDueDate.addEventListener("click", EventListeners.editDueDate);
   todoContainer.appendChild(todoDueDate);
 
   return todoContainer;
@@ -168,19 +167,11 @@ export const loadTodoDescription = (todoContainer, project, todo) => {
   descriptionContainer.id = "description-container";
   descriptionContainer.dataset.project = project.getTitle();
   descriptionContainer.dataset.todo = todo.getTitle();
-  const descriptionEditButton = new Image();
-  descriptionEditButton.classList.add("description-edit-button");
-  descriptionEditButton.src = editingSVG;
-  descriptionEditButton.addEventListener(
-    "click",
-    EventListeners.editTodoDescription
-  );
 
   const descriptionDiv = document.createElement("div");
   descriptionDiv.textContent = todo.getDescription() || "No Description";
 
   todoContainer.after(descriptionContainer);
-  descriptionContainer.appendChild(descriptionEditButton);
   descriptionContainer.appendChild(descriptionDiv);
 };
 
