@@ -1,38 +1,35 @@
-"use strict";
-const createProject = (title) => {
+export default (title) => {
+  let _title = title;
   const todos = [];
-  const getTitle = () => title;
-  const addTodo = (todo) => todos.push(todo);
-  const deleteTodo = (title) => {
-    const index = todos.findIndex((todo) => todo.getTitle() == title);
-    todos.splice(index, 1);
-  };
-  const findTodo = (title) => {
-    let matchingTodo;
-    todos.forEach((todo) => {
-      if (todo.getTitle() === title) {
-        matchingTodo = todo;
-      }
-    });
-    return matchingTodo;
-  };
-  const getTodos = () => todos;
-  const getTodosDueToday = () => {
-    return todos.filter((todo) => todo.isDueToday());
-  };
-  const isEmpty = () => {
-    if (!todos.length) return true;
-  };
 
   return {
-    getTitle,
-    addTodo,
-    deleteTodo,
-    findTodo,
-    getTodos,
-    getTodosDueToday,
-    isEmpty,
+    get title() {
+      return _title;
+    },
+    set title(newTitle) {
+      _title = newTitle;
+    },
+    get todos() {
+      return todos;
+    },
+    get todosDueToday() {
+      return todos.filter((todo) => todo.isDueToday());
+    },
+    addTodo(todo) {
+      todos.push(todo);
+    },
+    deleteTodo(todoTitle) {
+      const index = todos.findIndex((todo) => todo.title === todoTitle);
+      todos.splice(index, 1);
+    },
+    findTodo(todoTitle) {
+      let matchingTodo;
+      todos.forEach((todo) => {
+        if (todo.title === todoTitle) {
+          matchingTodo = todo;
+        }
+      });
+      return matchingTodo;
+    },
   };
 };
-
-export default createProject;

@@ -1,27 +1,22 @@
-"use strict";
-import * as Data from "./Data";
-import * as UI from "./UI";
-import createProject from "./Project";
-import createTodo from "./Todo";
+import Database from './Database';
+import * as UI from './UI';
+import Project from './Project';
+import Todo from './Todo';
 
-export const initialize = () => {
+const populateDefaultData = () => {
+  const inbox = Project('Inbox');
+  const greetingTodo = Todo('This is a todo');
+  inbox.addTodo(greetingTodo);
+  const helpTodo = Todo('Feel free to add your own projects and todos!');
+  inbox.addTodo(helpTodo);
+  Database.addProject(inbox);
+};
+
+export default () => {
   if (localStorage.length) {
-    Data.retrieveDataFromLocalStorage();
+    Database.load();
   } else {
     populateDefaultData();
   }
   UI.initialize();
-};
-
-const populateDefaultData = () => {
-  if (!Data.getProjects().length) {
-    const inbox = createProject("Inbox");
-    const greetingTodo = createTodo("This is a todo");
-    inbox.addTodo(greetingTodo);
-    const helpTodo = createTodo(
-      "Feel free to add your own projects and todos!"
-    );
-    inbox.addTodo(helpTodo);
-    Data.addProject(inbox);
-  }
 };

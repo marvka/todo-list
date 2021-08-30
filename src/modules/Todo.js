@@ -1,33 +1,39 @@
-"use strict";
-import endOfToday from "date-fns/endOfToday";
-import isToday from "date-fns/isToday";
+import endOfToday from 'date-fns/endOfToday';
+import isToday from 'date-fns/isToday';
 
-const createTodo = (title, dueDate = endOfToday(), description, priority) => {
-  const getTitle = () => title;
-  const getDueDate = () => dueDate;
-  const setDueDate = (newDueDate) => (dueDate = newDueDate);
-  const getDescription = () => description;
-  const setDescription = (newDescription) => (description = newDescription);
-  const getPriority = () => priority;
-  const isDueToday = () => isToday(dueDate);
-  const getPlain = () => {
-    return {
-      title,
-      dueDate,
-      description,
-      priority,
-    };
-  };
+export default (title, dueDate = endOfToday(), description, priority) => {
+  let _title = title;
+  let _dueDate = dueDate;
+  let _description = description;
+  let _priority = priority;
 
   return {
-    getTitle,
-    getDueDate,
-    setDueDate,
-    getDescription,
-    setDescription,
-    getPriority,
-    isDueToday,
-    getPlain,
+    get title() {
+      return _title;
+    },
+    set title(newTitle) {
+      _title = newTitle;
+    },
+    get dueDate() {
+      return dueDate;
+    },
+    set dueDate(newDueDate) {
+      _dueDate = newDueDate;
+    },
+    get description() {
+      return _description;
+    },
+    set description(newDescription) {
+      _description = newDescription;
+    },
+    get priority() {
+      return _priority;
+    },
+    set priority(newPriority) {
+      _priority = newPriority;
+    },
+    isDueToday() {
+      return isToday(_dueDate);
+    },
   };
 };
-export default createTodo;
