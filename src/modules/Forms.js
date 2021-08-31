@@ -36,7 +36,7 @@ export const clearForm = () => {
   }
 };
 
-export const loadNewTodoForm = () => {
+const createTodoForm = (title, description, dueDate, priority) => {
   const formContainer = document.createElement('div');
   formContainer.id = 'form-add-todo';
   formContainer.classList.add('form-container');
@@ -97,16 +97,27 @@ export const loadNewTodoForm = () => {
   highPriority.textContent = 'High';
   selectPriority.appendChild(highPriority);
   formContainer.appendChild(priorityContainer);
+  return formContainer;
+};
 
+const createTodoFormButtons = (submitEventListener, cancelEventListener) => {
   const addButton = document.createElement('button');
   addButton.id = 'form-add-todo';
   addButton.textContent = 'Submit';
-  addButton.addEventListener('click', EventListeners.addTodo);
-  formContainer.appendChild(addButton);
+  addButton.addEventListener('click', submitEventListener);
 
   const cancelButton = document.createElement('button');
   cancelButton.id = 'form-cancel';
   cancelButton.textContent = 'Cancel';
-  cancelButton.addEventListener('click', EventListeners.clearForm);
-  formContainer.appendChild(cancelButton);
+  cancelButton.addEventListener('click', cancelEventListener);
+
+  return [addButton, cancelButton];
+};
+export const loadNewTodoForm = () => {
+  const todoForm = createTodoForm();
+  const buttons = createTodoFormButtons(
+    EventListeners.addTodo,
+    EventListeners.clearForm,
+  );
+  buttons.forEach((button) => todoForm.appendChild(button));
 };
