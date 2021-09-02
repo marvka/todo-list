@@ -23,8 +23,7 @@ export default (title) => {
       todos.splice(index, 1);
     },
     findTodo(todoTitle) {
-      const matchingTodo = todos.filter((todo) => todo.title === todoTitle);
-      return matchingTodo || false;
+      return todos.find((todo) => todo.title === todoTitle);
     },
   };
 };
