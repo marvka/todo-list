@@ -4,7 +4,7 @@ import isToday from 'date-fns/isToday';
 export default (title, dueDate = endOfToday(), description, priority) => {
   let _title = title;
   let _dueDate = dueDate;
-  let _description = description;
+  let _description = description || '';
   let _priority = priority;
 
   return {
