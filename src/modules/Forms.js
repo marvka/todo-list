@@ -1,4 +1,6 @@
+import Database from './Database';
 import * as EventListeners from './EventListeners';
+import { setSelectedIndex } from './Helper';
 
 const body = document.querySelector('body');
 
@@ -36,11 +38,10 @@ export const clearForm = () => {
   }
 };
 
-const createTodoForm = (title, description, dueDate, priority) => {
+const createTodoForm = (curProject, curTodo) => {
   const formContainer = document.createElement('div');
   formContainer.id = 'form-add-todo';
   formContainer.classList.add('form-container');
-  body.appendChild(formContainer);
 
   const titleContainer = document.createElement('div');
   const titleLabel = document.createElement('label');
@@ -50,8 +51,27 @@ const createTodoForm = (title, description, dueDate, priority) => {
   const titleInput = document.createElement('input');
   titleInput.setAttribute('type', 'text');
   titleInput.id = 'form-title';
+  titleInput.value = curTodo ? curTodo.title : '';
   titleContainer.appendChild(titleInput);
   formContainer.appendChild(titleContainer);
+
+  const projectContainer = document.createElement('div');
+  const projectLabel = document.createElement('label');
+  projectLabel.textContent = 'Project';
+  projectLabel.setAttribute('for', 'select-project');
+  projectContainer.appendChild(projectLabel);
+  const projectSelection = document.createElement('select');
+  projectSelection.setAttribute('name', 'select-project');
+  projectSelection.id = 'select-project';
+  projectContainer.appendChild(projectSelection);
+  Database.projects.forEach((project) => {
+    const projectOption = document.createElement('option');
+    projectOption.textContent = project.title;
+    projectOption.value = project.title;
+    projectSelection.appendChild(projectOption);
+  });
+  if (curProject) setSelectedIndex(projectSelection, curProject.title);
+  formContainer.appendChild(projectContainer);
 
   const descriptionContainer = document.createElement('div');
   const descriptionLabel = document.createElement('label');
@@ -61,6 +81,7 @@ const createTodoForm = (title, description, dueDate, priority) => {
   const descriptionInput = document.createElement('input');
   descriptionInput.setAttribute('type', 'text');
   descriptionInput.id = 'form-description';
+  descriptionInput.value = curTodo ? curTodo.description : '';
   descriptionContainer.appendChild(descriptionInput);
   formContainer.appendChild(descriptionContainer);
 
@@ -72,6 +93,9 @@ const createTodoForm = (title, description, dueDate, priority) => {
   const dueDateInput = document.createElement('input');
   dueDateInput.setAttribute('type', 'date');
   dueDateInput.id = 'form-dueDate';
+  if (typeof curTodo !== 'undefined') {
+    dueDateInput.valueAsDate = curTodo ? curTodo.dueDate : '';
+  }
   dueDateContainer.appendChild(dueDateInput);
   formContainer.appendChild(dueDateContainer);
 
@@ -96,7 +120,11 @@ const createTodoForm = (title, description, dueDate, priority) => {
   highPriority.value = 'high';
   highPriority.textContent = 'High';
   selectPriority.appendChild(highPriority);
+  if (curTodo && curTodo.priority) {
+    setSelectedIndex(selectPriority, curTodo.priority);
+  }
   formContainer.appendChild(priorityContainer);
+
   return formContainer;
 };
 
@@ -113,11 +141,23 @@ const createTodoFormButtons = (submitEventListener, cancelEventListener) => {
 
   return [addButton, cancelButton];
 };
-export const loadNewTodoForm = () => {
-  const todoForm = createTodoForm();
+
+export const loadNewTodoForm = (project) => {
+  const todoForm = createTodoForm(project);
   const buttons = createTodoFormButtons(
-    EventListeners.addTodo,
+    EventListeners.submitTodo,
     EventListeners.clearForm,
   );
   buttons.forEach((button) => todoForm.appendChild(button));
+  body.appendChild(todoForm);
+};
+
+export const loadEditTodoForm = (project, todo) => {
+  const todoForm = createTodoForm(project, todo);
+  const buttons = createTodoFormButtons(
+    EventListeners.submitTodoChanges(project, todo),
+    EventListeners.clearForm,
+  );
+  buttons.forEach((button) => todoForm.appendChild(button));
+  body.appendChild(todoForm);
 };

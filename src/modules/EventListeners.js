@@ -10,9 +10,9 @@ export const loadNewProjectForm = () => {
   Forms.loadNewProjectForm();
 };
 
-export const loadNewTodoForm = () => {
+export const loadNewTodoForm = (project) => () => {
   Forms.clearForm();
-  Forms.loadNewTodoForm();
+  Forms.loadNewTodoForm(project);
 };
 
 export const loadTodosDueToday = () => {
@@ -33,10 +33,10 @@ export const addNewProject = () => {
   }
 };
 
-export const addTodo = () => {
+export const submitTodo = () => {
   if (document.querySelector('div#form-add-todo')) {
     const project = Database.findProject(
-      document.querySelector('#active-project-title').textContent,
+      document.querySelector('select#select-project').value,
     );
     const title = document.querySelector('input#form-title').value;
     const dueDate = document.querySelector('input#form-dueDate').valueAsDate;
@@ -48,6 +48,34 @@ export const addTodo = () => {
     UI.loadProject(project);
     Forms.clearForm();
   }
+};
+
+export const editTodo = (event) => {
+  const project = Database.findProject(event.target.parentNode.dataset.project);
+  const todo = project.findTodo(event.target.parentNode.dataset.todo);
+
+  Forms.clearForm();
+  Forms.loadEditTodoForm(project, todo);
+};
+
+export const submitTodoChanges = (project, todo) => () => {
+  // FIXME: Changed todos always propagate to the bottom of the todo list when
+  // submitting. Might have to implement alphabetical sorting or sorting by due
+  // date or some such down in UI.loadProject or UI.loadTodos
+  const newProject = Database.findProject(
+    document.querySelector('select#select-project').value,
+  );
+  const newTitle = document.querySelector('input#form-title').value;
+  const newDueDate = document.querySelector('input#form-dueDate').valueAsDate;
+  const newDescription = document.querySelector('input#form-description').value;
+  const newPriority = document.querySelector('select#priority-select').value;
+
+  project.deleteTodo(todo.title);
+  newProject.addTodo(Todo(newTitle, newDueDate, newDescription, newPriority));
+
+  Database.save();
+  UI.loadProject(project);
+  Forms.clearForm();
 };
 
 export const toggleTodoDescription = (event) => {

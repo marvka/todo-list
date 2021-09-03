@@ -19,6 +19,7 @@ const Data = () => {
       return matchedProject || false;
     },
     save() {
+      // TODO: Rewrite function
       localStorage.clear();
       const projects = _projects.reduce((projectsArr, currentProject) => {
         const { title, todos } = currentProject;
@@ -28,6 +29,7 @@ const Data = () => {
       localStorage.setItem('projects', JSON.stringify(projects));
     },
     load() {
+      // TODO: Rewrite function
       const storedProjects = JSON.parse(localStorage.getItem('projects'));
       storedProjects.forEach((storedProject) => {
         const project = Project(storedProject.title);

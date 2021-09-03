@@ -113,8 +113,15 @@ const loadTodo = (projectTitle, todo) => {
   });
   todoContainer.appendChild(todoDueDate);
 
+  const todoEditButton = new Image();
+  todoEditButton.src = notepadSVG;
+  todoEditButton.id = 'notepadSVG';
+  todoEditButton.addEventListener('click', EventListeners.editTodo);
+  todoContainer.appendChild(todoEditButton);
+
   return todoContainer;
 };
+
 const loadTodos = (projectTitle, todos) => {
   const todoViewContainer = document.getElementById('todo-view-container');
 
@@ -133,7 +140,10 @@ export const loadProject = (project) => {
   if (project.title !== 'Today') {
     const newTodoButton = document.createElement('button');
     newTodoButton.textContent = '+ Todo';
-    newTodoButton.addEventListener('click', EventListeners.loadNewTodoForm);
+    newTodoButton.addEventListener(
+      'click',
+      EventListeners.loadNewTodoForm(project),
+    );
     todoViewContainer.appendChild(newTodoButton);
   }
 };

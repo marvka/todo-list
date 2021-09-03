@@ -41,3 +41,7 @@ div.due-date {
 #description-container {
   display: flex;
 }
+
+#notepadSVG {
+  height: 1em;
+}
