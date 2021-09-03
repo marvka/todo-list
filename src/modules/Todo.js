@@ -15,7 +15,7 @@ export default (title, dueDate = endOfToday(), description, priority) => {
       _title = newTitle;
     },
     get dueDate() {
-      return dueDate;
+      return _dueDate;
     },
     set dueDate(newDueDate) {
       _dueDate = newDueDate;
