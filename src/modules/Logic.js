@@ -3,7 +3,7 @@ import * as UI from './UI';
 import Project from './Project';
 import Todo from './Todo';
 
-const populateDefaultData = () => {
+const init = () => {
   const inbox = Project('Inbox');
   const greetingTodo = Todo('This is a todo');
   inbox.addTodo(greetingTodo);
@@ -16,7 +16,7 @@ export default () => {
   if (localStorage.length) {
     Database.load();
   } else {
-    populateDefaultData();
+    init();
   }
   UI.initialize();
 };
