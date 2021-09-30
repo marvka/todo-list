@@ -1,21 +1,17 @@
 import formatISO from 'date-fns/formatISO';
+import notepadSVG from '../../assets/edit-regular.svg';
+import DomFactory from '../helper/DomFactory';
 import Database from '../logic/Database';
 import * as EventListeners from './EventListeners';
-import notepadSVG from '../../assets/edit-regular.svg';
 
 const body = document.querySelector('body');
 
 const loadLayout = () => {
-  const header = document.createElement('header');
-  body.appendChild(header);
+  const header = DomFactory('header');
+  const sidebar = DomFactory('nav', { id: 'sidebar' });
+  const todoViewContainer = DomFactory('div', { id: 'todo-view-container' });
 
-  const sidebar = document.createElement('nav');
-  sidebar.id = 'sidebar';
-  body.appendChild(sidebar);
-
-  const todoViewContainer = document.createElement('div');
-  todoViewContainer.id = 'todo-view-container';
-  body.appendChild(todoViewContainer);
+  body.append(header, sidebar, todoViewContainer);
 };
 
 const loadHeader = () => {
