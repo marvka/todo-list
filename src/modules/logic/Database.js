@@ -19,14 +19,8 @@ const Data = () => {
       return matchedProject || false;
     },
     save() {
-      // TODO: Rewrite function
       localStorage.clear();
-      const projects = _projects.reduce((projectsArr, currentProject) => {
-        const { title, todos } = currentProject;
-        projectsArr.push({ title, todos });
-        return projectsArr;
-      }, []);
-      localStorage.setItem('projects', JSON.stringify(projects));
+      localStorage.setItem('projects', JSON.stringify(_projects));
     },
     load() {
       // TODO: Rewrite function
