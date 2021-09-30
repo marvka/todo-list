@@ -38,7 +38,7 @@ nav,
   display: flex;
 }
 
-div.due-date {
+.due-date {
   margin-left: auto;
   margin-right: 0.5em;
 }

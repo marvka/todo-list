@@ -72,44 +72,49 @@ export const loadHeading = (title) => {
 const loadTodo = (projectTitle, todo) => {
   const todoTitle = todo.title;
 
-  const todoContainer = document.createElement('div');
-  todoContainer.classList.add('todo');
-  todoContainer.dataset.todo = todoTitle;
-  todoContainer.dataset.project = projectTitle;
+  const containerElement = DomFactory('div', {
+    class: 'todo',
+    'data-project': projectTitle,
+    'data-todo': todoTitle,
+  });
 
-  const descriptionToggleButton = document.createElement('button');
-  descriptionToggleButton.classList.add('show-description');
+  const descriptionToggleButton = DomFactory(
+    'button',
+    { class: 'show-description' },
+    '+',
+  );
   descriptionToggleButton.addEventListener(
     'click',
     EventListeners.toggleTodoDescription,
   );
-  descriptionToggleButton.textContent = '+';
-  todoContainer.appendChild(descriptionToggleButton);
 
-  const todoCheckbox = document.createElement('input');
-  todoCheckbox.type = 'checkbox';
-  todoCheckbox.classList.add('delete-todo');
-  todoCheckbox.addEventListener('click', EventListeners.deleteTodo);
-  todoContainer.appendChild(todoCheckbox);
-
-  const todoTitleDiv = document.createElement('div');
-  todoTitleDiv.textContent = todoTitle;
-  todoContainer.appendChild(todoTitleDiv);
-
-  const todoDueDate = document.createElement('div');
-  todoDueDate.classList.add('due-date');
-  todoDueDate.textContent = formatISO(todo.dueDate, {
-    representation: 'date',
+  const checkboxElement = DomFactory('input', {
+    type: 'checkbox',
+    class: 'delete-todo',
   });
-  todoContainer.appendChild(todoDueDate);
+  checkboxElement.addEventListener('click', EventListeners.deleteTodo);
 
-  const todoEditButton = new Image();
-  todoEditButton.src = notepadSVG;
-  todoEditButton.id = 'notepadSVG';
-  todoEditButton.addEventListener('click', EventListeners.editTodo);
-  todoContainer.appendChild(todoEditButton);
+  const titleElement = DomFactory('p', null, todoTitle);
 
-  return todoContainer;
+  const dueDateElement = DomFactory(
+    'p',
+    { class: 'due-date' },
+    formatISO(todo.dueDate, { representation: 'date' }),
+  );
+
+  const editButton = new Image();
+  editButton.src = notepadSVG;
+  editButton.id = 'notepadSVG';
+  editButton.addEventListener('click', EventListeners.editTodo);
+
+  containerElement.append(
+    descriptionToggleButton,
+    checkboxElement,
+    titleElement,
+    dueDateElement,
+    editButton,
+  );
+  return containerElement;
 };
 
 const loadTodos = (projectTitle, todos) => {
