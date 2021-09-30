@@ -1,6 +1,6 @@
 export default (title) => {
   let _title = title;
-  const todos = [];
+  const _todos = [];
 
   return {
     get title() {
@@ -10,20 +10,20 @@ export default (title) => {
       _title = newTitle;
     },
     get todos() {
-      return todos;
+      return _todos;
     },
     get todosDueToday() {
-      return todos.filter((todo) => todo.isDueToday());
+      return _todos.filter((todo) => todo.isDueToday());
     },
     addTodo(todo) {
-      todos.push(todo);
+      _todos.push(todo);
     },
     deleteTodo(todoTitle) {
-      const index = todos.findIndex((todo) => todo.title === todoTitle);
-      todos.splice(index, 1);
+      const index = _todos.findIndex((todo) => todo.title === todoTitle);
+      _todos.splice(index, 1);
     },
     findTodo(todoTitle) {
-      return todos.find((todo) => todo.title === todoTitle);
+      return _todos.find((todo) => todo.title === todoTitle);
     },
   };
 };
