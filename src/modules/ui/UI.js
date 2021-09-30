@@ -32,31 +32,28 @@ export const loadSidebar = () => {
   clearSideBar();
   const sidebar = document.getElementById('sidebar');
 
-  const sidebarList = document.createElement('ul');
-  sidebarList.id = 'projects';
+  const sidebarList = DomFactory('ul', { id: 'projects' });
   sidebar.appendChild(sidebarList);
 
-  const today = document.createElement('li');
-  today.id = 'today';
-  today.textContent = 'Today';
+  const today = DomFactory('li', { id: 'today' }, 'Today');
   today.addEventListener('click', EventListeners.loadTodosDueToday);
   sidebarList.appendChild(today);
 
   Database.projects.forEach((project) => {
-    const projectElement = document.createElement('li');
-    projectElement.textContent = project.title;
-    projectElement.id = project.title;
-    projectElement.classList.add('project');
+    const projectElement = DomFactory(
+      'li',
+      { id: project.title, class: 'project' },
+      project.title,
+    );
     projectElement.addEventListener('click', EventListeners.loadProject);
     sidebarList.appendChild(projectElement);
   });
 
+  // Move inbox to the top
   const inbox = document.querySelector('#Inbox');
   today.before(inbox);
 
-  const addProject = document.createElement('li');
-  addProject.textContent = '+ Project';
-  addProject.id = 'add-project';
+  const addProject = DomFactory('li', { id: 'add-project' }, '+ Project');
   addProject.addEventListener('click', EventListeners.loadNewProjectForm);
   sidebarList.appendChild(addProject);
 };
