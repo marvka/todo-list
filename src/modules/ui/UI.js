@@ -184,7 +184,7 @@ export const reloadTodo = (todoContainer, projectTitle, todo) => {
   todoContainer.replaceWith(newTodoContainer);
 };
 
-export const initialize = () => {
+export const init = () => {
   loadLayout();
   loadHeader();
   loadSidebar();

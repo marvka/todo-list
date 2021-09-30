@@ -16,5 +16,5 @@ export default () => {
   } else {
     init();
   }
-  UI.initialize();
+  UI.init();
 };
