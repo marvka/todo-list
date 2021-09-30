@@ -1,9 +1,9 @@
 import parseISO from 'date-fns/parseISO';
 import * as UI from './UI';
-import Database from './Database';
+import Database from '../logic/Database';
 import * as Forms from './Forms';
-import Project from './Project';
-import Todo from './Todo';
+import Project from '../logic/Project';
+import Todo from '../logic/Todo';
 
 export const loadNewProjectForm = () => {
   Forms.clearForm();

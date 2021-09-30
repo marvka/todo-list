@@ -1,5 +1,5 @@
 import Database from './Database';
-import * as UI from './UI';
+import * as UI from '../ui/UI';
 import Project from './Project';
 import Todo from './Todo';
 

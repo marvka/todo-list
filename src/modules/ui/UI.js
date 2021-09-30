@@ -1,7 +1,7 @@
 import formatISO from 'date-fns/formatISO';
-import Database from './Database';
+import Database from '../logic/Database';
 import * as EventListeners from './EventListeners';
-import notepadSVG from '../assets/edit-regular.svg';
+import notepadSVG from '../../assets/edit-regular.svg';
 
 const body = document.querySelector('body');
 

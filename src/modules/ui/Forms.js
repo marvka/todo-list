@@ -1,6 +1,6 @@
-import Database from './Database';
+import Database from '../logic/Database';
 import * as EventListeners from './EventListeners';
-import { setSelectedIndex } from './Helper';
+import { setSelectedIndex } from '../helper/Helper';
 
 const body = document.querySelector('body');
 
