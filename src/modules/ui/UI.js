@@ -16,10 +16,9 @@ const loadLayout = () => {
 
 const loadHeader = () => {
   const header = document.querySelector('header');
+  const title = DomFactory('h1', null, 'ToDoers');
 
-  const title = document.createElement('h1');
-  title.textContent = 'ToDoers';
-  header.appendChild(title);
+  header.append(title);
 };
 
 export const clearSideBar = () => {
