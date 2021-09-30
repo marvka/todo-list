@@ -133,8 +133,7 @@ export const loadProject = (project) => {
   loadHeading(project.title);
   loadTodos(project.title, project.todos);
   if (project.title !== 'Today') {
-    const newTodoButton = document.createElement('button');
-    newTodoButton.textContent = '+ Todo';
+    const newTodoButton = DomFactory('button', null, '+ Todo');
     newTodoButton.addEventListener(
       'click',
       EventListeners.loadNewTodoForm(project),
