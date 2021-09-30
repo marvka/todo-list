@@ -1,11 +1,17 @@
-const DomFactory = (type, attributes, textContent = '') => {
+const DomFactory = (type, attributes, textContent) => {
   const element = document.createElement(type);
 
-  Object.keys(attributes).forEach((key) => {
-    element.setAttribute(key, attributes[key]);
-  });
+  if (attributes) {
+    Object.keys(attributes).forEach((key) => {
+      element.setAttribute(key, attributes[key]);
+    });
+  }
 
-  element.textContent = textContent;
+  if (textContent) {
+    element.textContent = textContent;
+  } else {
+    element.textContent = '';
+  }
 
   return element;
 };
