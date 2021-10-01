@@ -23,21 +23,12 @@ const Data = () => {
       localStorage.setItem('projects', JSON.stringify(_projects));
     },
     load() {
-      // TODO: Rewrite function
-      const storedProjects = JSON.parse(localStorage.getItem('projects'));
-      storedProjects.forEach((storedProject) => {
-        const project = Project(storedProject.title);
+      JSON.parse(localStorage.getItem('projects')).forEach((storedProject) => {
+        const newProject = Project(storedProject.title);
         storedProject.todos.forEach((todo) => {
-          project.addTodo(
-            Todo(
-              todo.title,
-              parseISO(todo.dueDate),
-              todo.description,
-              todo.priority,
-            ),
-          );
+          newProject.addTodo(Object.assign(Todo(), todo));
         });
-        _projects.push(project);
+        this.addProject(newProject);
       });
     },
     getTodosDueToday() {
