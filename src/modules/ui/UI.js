@@ -1,4 +1,4 @@
-import formatISO from 'date-fns/formatISO';
+import { formatISO, parseISO } from 'date-fns';
 import notepadSVG from '../../assets/edit-regular.svg';
 import DomFactory from '../helper/DomFactory';
 import Database from '../logic/Database';
@@ -99,7 +99,7 @@ const loadTodo = (projectTitle, todo) => {
   const dueDateElement = DomFactory(
     'p',
     { class: 'due-date' },
-    formatISO(todo.dueDate, { representation: 'date' }),
+    formatISO(parseISO(todo.dueDate), { representation: 'date' }),
   );
 
   const editButton = new Image();
