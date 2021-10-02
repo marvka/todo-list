@@ -34,20 +34,18 @@ export const addNewProject = () => {
 };
 
 export const submitTodo = () => {
-  if (document.querySelector('div#form-add-todo')) {
-    const project = Database.findProject(
-      document.querySelector('select#select-project').value,
-    );
-    const title = document.querySelector('input#form-title').value;
-    const dueDate = document.querySelector('input#form-dueDate').valueAsDate;
-    const description = document.querySelector('input#form-description').value;
-    const priority = document.querySelector('select#priority-select').value;
-    const newTodo = Todo(title, dueDate, description, priority);
-    project.addTodo(newTodo);
-    Database.save();
-    UI.loadProject(project);
-    Forms.clearForm();
-  }
+  const project = Database.findProject(
+    document.querySelector('select#select-project').value,
+  );
+  const title = document.querySelector('input#form-title').value;
+  const dueDate = document.querySelector('input#form-dueDate').valueAsDate;
+  const description = document.querySelector('input#form-description').value;
+  const priority = document.querySelector('select#priority-select').value;
+  const newTodo = Todo(title, dueDate, description, priority);
+  project.addTodo(newTodo);
+  Database.save();
+  UI.loadProject(project);
+  Forms.clearForm();
 };
 
 export const editTodo = (event) => {
