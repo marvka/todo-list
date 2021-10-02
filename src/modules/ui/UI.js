@@ -99,7 +99,7 @@ const loadTodo = (projectTitle, todo) => {
   const dueDateElement = DomFactory(
     'p',
     { class: 'due-date' },
-    formatISO(parseISO(todo.dueDate), { representation: 'date' }),
+    formatISO(todo.dueDate, { representation: 'date' }),
   );
 
   const editButton = new Image();

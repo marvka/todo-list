@@ -1,3 +1,4 @@
+import { parseISO } from 'date-fns';
 import endOfToday from 'date-fns/endOfToday';
 import isToday from 'date-fns/isToday';
 
@@ -18,7 +19,7 @@ export default (title, dueDate = endOfToday(), description, priority) => {
       return _dueDate;
     },
     set dueDate(newDueDate) {
-      _dueDate = newDueDate;
+      _dueDate = parseISO(newDueDate);
     },
     get description() {
       return _description;
