@@ -1,34 +1,28 @@
 import Database from '../logic/Database';
 import * as EventListeners from './EventListeners';
 import { setSelectedIndex } from '../helper/Helper';
+import DomFactory from '../helper/DomFactory';
 
 const body = document.querySelector('body');
 
 export const loadNewProjectForm = () => {
-  const formContainer = document.createElement('div');
-  formContainer.id = 'form-add-project';
-  formContainer.classList.add('form-container');
+  const formContainer = DomFactory('div', {
+    class: 'form-container',
+    id: 'form-add-project',
+  });
   body.appendChild(formContainer);
 
-  const titleLabel = document.createElement('label');
-  titleLabel.textContent = 'Title';
-  titleLabel.setAttribute('for', 'add-project-title');
-  formContainer.appendChild(titleLabel);
-  const titleInput = document.createElement('input');
-  titleInput.setAttribute('type', 'text');
-  titleInput.id = 'form-title';
-  formContainer.appendChild(titleInput);
+  const titleLabel = DomFactory('label', { for: 'add-project-title' }, 'Title');
+  const titleInput = DomFactory('input', { type: 'text' }, 'form-title');
 
-  const buttonContainer = document.createElement('div');
-  const addButton = document.createElement('button');
-  addButton.textContent = 'Submit';
+  const buttonContainer = DomFactory('div');
+  const addButton = DomFactory('button', null, 'Submit');
   addButton.addEventListener('click', EventListeners.addNewProject);
-  buttonContainer.appendChild(addButton);
-  const cancelButton = document.createElement('button');
-  cancelButton.textContent = 'Cancel';
+  const cancelButton = DomFactory('button', null, 'Cancel');
   cancelButton.addEventListener('click', EventListeners.clearForm);
-  buttonContainer.appendChild(cancelButton);
-  formContainer.appendChild(buttonContainer);
+  buttonContainer.append(addButton, cancelButton);
+
+  formContainer.append(titleLabel, titleInput, buttonContainer);
 };
 
 export const clearForm = () => {
@@ -39,104 +33,95 @@ export const clearForm = () => {
 };
 
 const createTodoForm = (curProject, curTodo) => {
-  const formContainer = document.createElement('div');
-  formContainer.id = 'form-add-todo';
-  formContainer.classList.add('form-container');
+  // TODO: Style with grid
+  const formContainer = DomFactory('div', {
+    class: 'form-container',
+    id: 'form-add-Todo',
+  });
 
-  const titleContainer = document.createElement('div');
-  const titleLabel = document.createElement('label');
-  titleLabel.textContent = 'Title';
-  titleLabel.setAttribute('for', 'form-title');
-  titleContainer.appendChild(titleLabel);
-  const titleInput = document.createElement('input');
-  titleInput.setAttribute('type', 'text');
-  titleInput.id = 'form-title';
-  titleInput.value = curTodo ? curTodo.title : '';
-  titleContainer.appendChild(titleInput);
-  formContainer.appendChild(titleContainer);
+  const titleLabel = DomFactory('label', { for: 'form-title' }, 'Title');
+  const titleInput = DomFactory('input', {
+    type: 'text',
+    value: curTodo ? curTodo.title : '',
+    id: 'form-title',
+  });
 
-  const projectContainer = document.createElement('div');
-  const projectLabel = document.createElement('label');
-  projectLabel.textContent = 'Project';
-  projectLabel.setAttribute('for', 'select-project');
-  projectContainer.appendChild(projectLabel);
-  const projectSelection = document.createElement('select');
-  projectSelection.setAttribute('name', 'select-project');
-  projectSelection.id = 'select-project';
-  projectContainer.appendChild(projectSelection);
+  const projectLabel = DomFactory(
+    'label',
+    { for: 'select-project' },
+    'Project',
+  );
+  const projectSelection = DomFactory('select', {
+    name: 'select-project',
+    id: 'select-project',
+  });
   Database.projects.forEach((project) => {
-    const projectOption = document.createElement('option');
-    projectOption.textContent = project.title;
-    projectOption.value = project.title;
+    const projectOption = DomFactory(
+      'option',
+      { value: project.title },
+      project.title,
+    );
     projectSelection.appendChild(projectOption);
   });
   if (curProject) setSelectedIndex(projectSelection, curProject.title);
-  formContainer.appendChild(projectContainer);
 
-  const descriptionContainer = document.createElement('div');
-  const descriptionLabel = document.createElement('label');
-  descriptionLabel.textContent = 'Description (optional)';
-  descriptionLabel.setAttribute('for', 'form-description');
-  descriptionContainer.appendChild(descriptionLabel);
-  const descriptionInput = document.createElement('input');
-  descriptionInput.setAttribute('type', 'text');
-  descriptionInput.id = 'form-description';
-  descriptionInput.value = curTodo ? curTodo.description : '';
-  descriptionContainer.appendChild(descriptionInput);
-  formContainer.appendChild(descriptionContainer);
+  const descriptionLabel = DomFactory(
+    'label',
+    { for: 'form-description' },
+    'Description(optional)',
+  );
+  const descriptionInput = DomFactory('input', {
+    type: 'text',
+    id: 'form-description',
+    value: curTodo ? curTodo.description : '',
+  });
 
-  const dueDateContainer = document.createElement('div');
-  const dueDateLabel = document.createElement('label');
-  dueDateLabel.textContent = 'Due Date';
-  dueDateLabel.setAttribute('for', 'form-dueDate');
-  dueDateContainer.appendChild(dueDateLabel);
-  const dueDateInput = document.createElement('input');
-  dueDateInput.setAttribute('type', 'date');
-  dueDateInput.id = 'form-dueDate';
+  const dueDateLabel = DomFactory('label', { for: 'form-dueDate' }, 'Due Date');
+  const dueDateInput = DomFactory('input', {
+    type: 'date',
+    id: 'form-dueDate',
+  });
   if (typeof curTodo !== 'undefined') {
     dueDateInput.valueAsDate = curTodo ? curTodo.dueDate : '';
   }
-  dueDateContainer.appendChild(dueDateInput);
-  formContainer.appendChild(dueDateContainer);
 
-  const priorityContainer = document.createElement('div');
-  const priorityLabel = document.createElement('label');
-  priorityLabel.textContent = 'Priority';
-  priorityLabel.setAttribute('for', 'priority-select');
-  priorityContainer.appendChild(priorityLabel);
-  const selectPriority = document.createElement('select');
-  selectPriority.setAttribute('name', 'priority-select');
-  selectPriority.id = 'priority-select';
-  priorityContainer.appendChild(selectPriority);
-  const lowPriority = document.createElement('option');
-  lowPriority.value = 'low';
-  lowPriority.textContent = 'Low';
-  selectPriority.appendChild(lowPriority);
-  const mediumPriority = document.createElement('option');
-  mediumPriority.value = 'medium';
-  mediumPriority.textContent = 'Medium';
-  selectPriority.appendChild(mediumPriority);
-  const highPriority = document.createElement('option');
-  highPriority.value = 'high';
-  highPriority.textContent = 'High';
-  selectPriority.appendChild(highPriority);
+  const priorityLabel = DomFactory(
+    'label',
+    { for: 'priority-select' },
+    'Priority',
+  );
+  const selectPriority = DomFactory('select', {
+    name: 'priority-select',
+    id: 'priority-select',
+  });
+  const lowPriority = DomFactory('option', { value: 'low' }, 'Low');
+  const mediumPriority = DomFactory('option', { value: 'medium' }, 'Medium');
+  const highPriority = DomFactory('option', { value: 'high' }, 'High');
+  selectPriority.append(lowPriority, mediumPriority, highPriority);
   if (curTodo && curTodo.priority) {
     setSelectedIndex(selectPriority, curTodo.priority);
   }
-  formContainer.appendChild(priorityContainer);
 
+  formContainer.append(
+    titleLabel,
+    titleInput,
+    projectLabel,
+    projectSelection,
+    descriptionLabel,
+    descriptionInput,
+    dueDateLabel,
+    dueDateInput,
+    priorityLabel,
+    selectPriority,
+  );
   return formContainer;
 };
 
 const createTodoFormButtons = (submitEventListener, cancelEventListener) => {
-  const addButton = document.createElement('button');
-  addButton.id = 'form-add-todo';
-  addButton.textContent = 'Submit';
+  const addButton = DomFactory('button', { id: 'form-add-todo' }, 'Submit');
   addButton.addEventListener('click', submitEventListener);
 
-  const cancelButton = document.createElement('button');
-  cancelButton.id = 'form-cancel';
-  cancelButton.textContent = 'Cancel';
+  const cancelButton = DomFactory('button', { id: 'form-cancel' }, 'Cancel');
   cancelButton.addEventListener('click', cancelEventListener);
 
   return [addButton, cancelButton];
