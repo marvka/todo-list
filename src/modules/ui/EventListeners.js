@@ -23,14 +23,12 @@ export const loadTodosDueToday = () => {
 };
 
 export const addNewProject = () => {
-  if (document.querySelector('div.form-container')) {
-    const title = document.getElementById('form-title').value;
-    const project = Project(title);
-    Database.addProject(project);
-    Database.save();
-    UI.loadSidebar();
-    Forms.clearForm();
-  }
+  const title = document.getElementById('form-title').value;
+  const project = Project(title);
+  Database.addProject(project);
+  Database.save();
+  UI.loadSidebar();
+  Forms.clearForm();
 };
 
 export const submitTodo = () => {

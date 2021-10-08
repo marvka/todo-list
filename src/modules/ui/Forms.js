@@ -13,7 +13,7 @@ export const loadNewProjectForm = () => {
   body.appendChild(formContainer);
 
   const titleLabel = DomFactory('label', { for: 'add-project-title' }, 'Title');
-  const titleInput = DomFactory('input', { type: 'text' }, 'form-title');
+  const titleInput = DomFactory('input', { type: 'text', id: 'form-title' });
 
   const buttonContainer = DomFactory('div');
   const addButton = DomFactory('button', null, 'Submit');
