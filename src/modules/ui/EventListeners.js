@@ -16,6 +16,8 @@ export const loadNewTodoForm = (project) => () => {
 };
 
 export const loadTodosDueToday = () => {
+  // TODO: Change the view so that projects that have todos due today are
+  // shown, and their respecitve todos are underneath the project titles
   const projectsWithTodosDueToday = Database.projects.filter(
     (project) => project.todosDueToday.length > 0,
   );
