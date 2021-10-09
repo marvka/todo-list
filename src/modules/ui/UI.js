@@ -74,8 +74,6 @@ const loadTodo = (projectTitle, todo) => {
 
   const containerElement = DomFactory('div', {
     class: 'todo',
-    'data-project': projectTitle,
-    'data-todo': todoTitle,
   });
 
   const descriptionToggleButton = DomFactory(
@@ -158,8 +156,6 @@ export const loadTodoDescription = (todoContainer, project, todo) => {
     descriptionContainer.innerHTML = '';
   }
   descriptionContainer.id = 'description-container';
-  descriptionContainer.dataset.project = project.title;
-  descriptionContainer.dataset.todo = todo.title;
 
   const descriptionDiv = document.createElement('div');
   descriptionDiv.textContent = todo.description || 'No Description';

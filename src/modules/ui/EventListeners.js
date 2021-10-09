@@ -49,9 +49,6 @@ export const submitTodo = () => {
 };
 
 export const editTodo = (event) => {
-  const project = Database.findProject(event.target.parentNode.dataset.project);
-  const todo = project.findTodo(event.target.parentNode.dataset.todo);
-
   Forms.clearForm();
   Forms.loadEditTodoForm(project, todo);
 };
@@ -78,9 +75,7 @@ export const submitTodoChanges = (project, todo) => () => {
 
 export const toggleTodoDescription = (event) => {
   const button = event.target;
-  const project = Database.findProject(event.target.parentNode.dataset.project);
   const todoContainer = event.target.parentNode;
-  const todo = project.findTodo(event.target.parentNode.dataset.todo);
 
   if (document.querySelector('#description-container')) {
     UI.unloadTodoDescription();
@@ -101,8 +96,6 @@ export const loadProject = (event) => {
 };
 
 export const deleteTodo = (event) => {
-  const title = event.target.parentNode.dataset.todo;
-  const project = Database.findProject(event.target.parentNode.dataset.project);
   const currentView = event.target.parentNode.parentNode.firstChild.textContent;
   project.deleteTodo(title);
   Database.save();
