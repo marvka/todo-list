@@ -149,7 +149,7 @@ export const loadTodosDueToday = (projectsWithTodosDueToday) => {
   });
 };
 
-export const loadTodoDescription = (todoContainer, project, todo) => {
+export const loadTodoDescription = (todoContainer, todo) => {
   const descriptionContainer = document.getElementById('description-container')
     || document.createElement('div');
   if (descriptionContainer.hasChildNodes()) {
