@@ -73,7 +73,7 @@ export const submitTodoChanges = (project, todo) => () => {
   Forms.clearForm();
 };
 
-export const toggleTodoDescription = (event) => {
+export const toggleTodoDescription = (todo) => (event) => {
   const button = event.target;
   const todoContainer = event.target.parentNode;
 
@@ -81,7 +81,7 @@ export const toggleTodoDescription = (event) => {
     UI.unloadTodoDescription();
     button.textContent = '+';
   } else {
-    UI.loadTodoDescription(todoContainer, project, todo);
+    UI.loadTodoDescription(todoContainer, todo);
     button.textContent = '-';
   }
 };

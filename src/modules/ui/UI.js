@@ -83,7 +83,7 @@ const loadTodo = (projectTitle, todo) => {
   );
   descriptionToggleButton.addEventListener(
     'click',
-    EventListeners.toggleTodoDescription,
+    EventListeners.toggleTodoDescription(todo),
   );
 
   const checkboxElement = DomFactory('input', {
