@@ -71,6 +71,7 @@ export const loadHeading = (title) => {
 
 const loadTodo = (projectTitle, todo) => {
   const todoTitle = todo.title;
+  const project = Database.findProject(projectTitle);
 
   const containerElement = DomFactory('div', {
     class: 'todo',
@@ -103,7 +104,7 @@ const loadTodo = (projectTitle, todo) => {
   const editButton = new Image();
   editButton.src = notepadSVG;
   editButton.id = 'notepadSVG';
-  editButton.addEventListener('click', EventListeners.editTodo);
+  editButton.addEventListener('click', EventListeners.editTodo(project, todo));
 
   containerElement.append(
     descriptionToggleButton,

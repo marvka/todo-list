@@ -48,7 +48,7 @@ export const submitTodo = () => {
   Forms.clearForm();
 };
 
-export const editTodo = (event) => {
+export const editTodo = (project, todo) => () => {
   Forms.clearForm();
   Forms.loadEditTodoForm(project, todo);
 };
