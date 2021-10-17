@@ -33,7 +33,7 @@ export const addNewProject = () => {
   Forms.clearForm();
 };
 
-export const submitTodo = () => {
+export const addTodo = () => {
   const project = Database.findProject(
     document.querySelector('select#select-project').value,
   );

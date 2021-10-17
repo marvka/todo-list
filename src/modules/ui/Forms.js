@@ -130,7 +130,7 @@ const createTodoFormButtons = (submitEventListener, cancelEventListener) => {
 export const loadNewTodoForm = (project) => {
   const todoForm = createTodoForm(project);
   const buttons = createTodoFormButtons(
-    EventListeners.submitTodo,
+    EventListeners.addTodo,
     EventListeners.clearForm,
   );
   buttons.forEach((button) => todoForm.appendChild(button));
