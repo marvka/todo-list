@@ -91,7 +91,10 @@ const loadTodo = (projectTitle, todo) => {
     type: 'checkbox',
     class: 'delete-todo',
   });
-  checkboxElement.addEventListener('click', EventListeners.deleteTodo);
+  checkboxElement.addEventListener(
+    'click',
+    EventListeners.deleteTodo(project, todo),
+  );
 
   const titleElement = DomFactory('p', null, todoTitle);
 

@@ -95,9 +95,9 @@ export const loadProject = (event) => {
   UI.loadProject(project);
 };
 
-export const deleteTodo = (event) => {
+export const deleteTodo = (project, todo) => (event) => {
   const currentView = event.target.parentNode.parentNode.firstChild.textContent;
-  project.deleteTodo(title);
+  project.deleteTodo(todo.title);
   Database.save();
   if (currentView === 'Today') {
     loadTodosDueToday();
