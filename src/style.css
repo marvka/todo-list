@@ -50,3 +50,7 @@ nav,
 #notepadSVG {
   height: 1em;
 }
+
+.invalid {
+  border: 1px solid red;
+}
