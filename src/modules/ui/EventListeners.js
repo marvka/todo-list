@@ -1,4 +1,5 @@
 import parseISO from 'date-fns/parseISO';
+import { isValid } from 'date-fns';
 import * as UI from './UI';
 import Database from '../logic/Database';
 import * as Forms from './Forms';
@@ -34,13 +35,40 @@ export const addNewProject = () => {
 };
 
 export const addTodo = () => {
-  const project = Database.findProject(
-    document.querySelector('select#select-project').value,
-  );
-  const title = document.querySelector('input#form-title').value;
-  const dueDate = document.querySelector('input#form-dueDate').valueAsDate;
-  const description = document.querySelector('input#form-description').value;
-  const priority = document.querySelector('select#priority-select').value;
+  if (document.querySelector('.invalid')) {
+    document.querySelectorAll('.invalid').forEach((element) => {
+      element.classList.remove('invalid');
+    });
+  }
+  const titleElement = document.querySelector('input#form-title');
+  const projectElement = document.querySelector('select#select-project');
+  const dueDateElement = document.querySelector('input#form-dueDate');
+  const descriptionElement = document.querySelector('input#form-description');
+  const priorityElement = document.querySelector('select#priority-select');
+
+  const project = Database.findProject(projectElement.value);
+  const title = titleElement.value;
+  if (title.length === 0) {
+    titleElement.classList.add('invalid');
+  } else if (titleElement.classList.contains('invalid')) {
+    titleElement.classList.remove('invalid');
+  }
+  const dueDate = dueDateElement.valueAsDate;
+  if (!isValid(dueDate)) {
+    dueDateElement.classList.add('invalid');
+  } else if (dueDateElement.classList.contains('invalid')) {
+    dueDateElement.classList.remove('invalid');
+  }
+  const description = descriptionElement.value;
+  if (description.length === 0) {
+    descriptionElement.classList.add('invalid');
+  }
+  const priority = priorityElement.value;
+
+  if (document.querySelector('.invalid')) {
+    return;
+  }
+
   const newTodo = Todo(title, dueDate, description, priority);
   project.addTodo(newTodo);
   Database.save();
