@@ -36,7 +36,6 @@ const createTodoForm = (curProject, curTodo) => {
   // TODO: Style with grid
   const formContainer = DomFactory('div', {
     class: 'form-container',
-    id: 'form-add-Todo',
   });
 
   const titleLabel = DomFactory('label', { for: 'form-title' }, 'Title');
@@ -118,9 +117,7 @@ const createTodoForm = (curProject, curTodo) => {
 };
 
 const createTodoFormButtons = (submitEventListener, cancelEventListener) => {
-  // FIXME: form-add-todo and form-add-Todo are in the form twice. One is the id
-  // of the submit button, one's the id of the form
-  const addButton = DomFactory('button', { id: 'form-add-todo' }, 'Submit');
+  const addButton = DomFactory('button', null, 'Submit');
   addButton.addEventListener('click', submitEventListener);
 
   const cancelButton = DomFactory('button', { id: 'form-cancel' }, 'Cancel');
