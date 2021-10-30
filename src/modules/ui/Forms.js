@@ -118,6 +118,8 @@ const createTodoForm = (curProject, curTodo) => {
 };
 
 const createTodoFormButtons = (submitEventListener, cancelEventListener) => {
+  // FIXME: form-add-todo and form-add-Todo are in the form twice. One is the id
+  // of the submit button, one's the id of the form
   const addButton = DomFactory('button', { id: 'form-add-todo' }, 'Submit');
   addButton.addEventListener('click', submitEventListener);
 
