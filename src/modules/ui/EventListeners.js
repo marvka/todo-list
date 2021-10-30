@@ -60,9 +60,6 @@ export const addTodo = () => {
     dueDateElement.classList.remove('invalid');
   }
   const description = descriptionElement.value;
-  if (description.length === 0) {
-    descriptionElement.classList.add('invalid');
-  }
   const priority = priorityElement.value;
 
   if (document.querySelector('.invalid')) {
