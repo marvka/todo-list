@@ -104,6 +104,8 @@ export const submitTodoChanges = (project, todo) => () => {
 };
 
 export const toggleTodoDescription = (todo) => (event) => {
+  // FIXME: If you expand one todos description, clicking on any other todo's
+  // description button closes it and opens another
   const button = event.target;
   const todoContainer = event.target.parentNode;
 
