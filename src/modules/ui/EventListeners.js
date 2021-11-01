@@ -5,6 +5,7 @@ import Database from '../logic/Database';
 import * as Forms from './Forms';
 import Project from '../logic/Project';
 import Todo from '../logic/Todo';
+import DomFactory from '../helper/DomFactory';
 
 export const loadNewProjectForm = () => {
   Forms.clearForm();
@@ -63,6 +64,9 @@ export const addTodo = () => {
   const priority = priorityElement.value;
 
   if (document.querySelector('.invalid')) {
+    const formContainer = document.querySelector('.form-container');
+    const errorMessage = DomFactory('p', { class: 'error-message' }, 'Please fill in the highlighted fields!');
+    formContainer.appendChild(errorMessage);
     return;
   }
 
