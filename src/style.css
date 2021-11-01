@@ -54,3 +54,7 @@ nav,
 .invalid {
   border: 1px solid red;
 }
+
+.error-message {
+  color: red;
+}
