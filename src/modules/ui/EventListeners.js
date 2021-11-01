@@ -36,10 +36,11 @@ export const addNewProject = () => {
 };
 
 export const addTodo = () => {
-  if (document.querySelector('.invalid')) {
+  if (document.querySelector('.error-message')) {
     document.querySelectorAll('.invalid').forEach((element) => {
       element.classList.remove('invalid');
     });
+    document.querySelector('.error-message').remove();
   }
   const titleElement = document.querySelector('input#form-title');
   const projectElement = document.querySelector('select#select-project');
