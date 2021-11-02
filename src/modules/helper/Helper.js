@@ -5,3 +5,13 @@ export const setSelectedIndex = (selectionDOM, value) => {
     }
   }
 };
+
+export const getChildNodeWithClass = (className, parentNode) => {
+  let matchingNode;
+  parentNode.childNodes.forEach((node) => {
+    if (node.classList.contains(className)) {
+      matchingNode = node;
+    }
+  });
+  return matchingNode;
+};
