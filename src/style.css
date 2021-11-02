@@ -43,10 +43,6 @@ nav,
   margin-right: 0.5em;
 }
 
-#description-container {
-  display: flex;
-}
-
 #notepadSVG {
   height: 1em;
 }
