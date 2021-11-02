@@ -54,3 +54,7 @@ nav,
 .error-message {
   color: red;
 }
+
+.description {
+  display: none;
+}

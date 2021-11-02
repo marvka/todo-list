@@ -6,6 +6,7 @@ import * as Forms from './Forms';
 import Project from '../logic/Project';
 import Todo from '../logic/Todo';
 import DomFactory from '../helper/DomFactory';
+import { getChildNodeWithClass } from '../helper/Helper';
 
 export const loadNewProjectForm = () => {
   Forms.clearForm();
@@ -66,7 +67,11 @@ export const addTodo = () => {
 
   if (document.querySelector('.invalid')) {
     const formContainer = document.querySelector('.form-container');
-    const errorMessage = DomFactory('p', { class: 'error-message' }, 'Please fill in the highlighted fields!');
+    const errorMessage = DomFactory(
+      'p',
+      { class: 'error-message' },
+      'Please fill in the highlighted fields!',
+    );
     formContainer.appendChild(errorMessage);
     return;
   }
@@ -104,16 +109,15 @@ export const submitTodoChanges = (project, todo) => () => {
 };
 
 export const toggleTodoDescription = (todo) => (event) => {
-  // FIXME: If you expand one todos description, clicking on any other todo's
-  // description button closes it and opens another
   const button = event.target;
-  const todoContainer = event.target.parentNode;
+  const todoWrapper = event.target.parentNode.parentNode;
+  const descriptionElement = getChildNodeWithClass('description', todoWrapper);
 
-  if (document.querySelector('#description-container')) {
-    UI.unloadTodoDescription();
+  if (descriptionElement.style.display) {
+    descriptionElement.style.display = '';
     button.textContent = '+';
   } else {
-    UI.loadTodoDescription(todoContainer, todo);
+    descriptionElement.style.display = 'block';
     button.textContent = '-';
   }
 };

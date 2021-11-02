@@ -70,6 +70,7 @@ export const loadHeading = (title) => {
 };
 
 const loadTodo = (projectTitle, todo) => {
+  const todoWrapper = DomFactory('div');
   const todoTitle = todo.title;
   const project = Database.findProject(projectTitle);
 
@@ -109,6 +110,11 @@ const loadTodo = (projectTitle, todo) => {
   editButton.id = 'notepadSVG';
   editButton.addEventListener('click', EventListeners.editTodo(project, todo));
 
+  const description = DomFactory('p', {
+    class: 'description',
+  });
+  description.textContent = todo.description || 'No description';
+
   containerElement.append(
     descriptionToggleButton,
     checkboxElement,
@@ -116,7 +122,10 @@ const loadTodo = (projectTitle, todo) => {
     dueDateElement,
     editButton,
   );
-  return containerElement;
+  todoWrapper.append(containerElement);
+  todoWrapper.append(description);
+
+  return todoWrapper;
 };
 
 const loadTodos = (projectTitle, todos) => {
@@ -151,26 +160,6 @@ export const loadTodosDueToday = (projectsWithTodosDueToday) => {
     const todos = project.todos.filter((todo) => todo.isDueToday());
     loadTodos(project.title, todos);
   });
-};
-
-export const loadTodoDescription = (todoContainer, todo) => {
-  const descriptionContainer = document.getElementById('description-container')
-    || document.createElement('div');
-  if (descriptionContainer.hasChildNodes()) {
-    descriptionContainer.innerHTML = '';
-  }
-  descriptionContainer.id = 'description-container';
-
-  const descriptionDiv = document.createElement('div');
-  descriptionDiv.textContent = todo.description || 'No Description';
-
-  todoContainer.after(descriptionContainer);
-  descriptionContainer.appendChild(descriptionDiv);
-};
-
-export const unloadTodoDescription = () => {
-  const descriptionContainer = document.querySelector('#description-container');
-  descriptionContainer.remove();
 };
 
 export const reloadTodo = (todoContainer, projectTitle, todo) => {
