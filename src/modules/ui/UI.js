@@ -1,6 +1,7 @@
 import { formatISO, parseISO } from 'date-fns';
 import notepadSVG from '../../assets/edit-regular.svg';
 import DomFactory from '../helper/DomFactory';
+import { sortTodosByDueDate, sortTodosByTitle } from '../helper/Helper';
 import Database from '../logic/Database';
 import * as EventListeners from './EventListeners';
 
@@ -131,6 +132,8 @@ const loadTodo = (projectTitle, todo) => {
 const loadTodos = (projectTitle, todos) => {
   const todoViewContainer = document.getElementById('todo-view-container');
 
+  todos.sort(sortTodosByTitle);
+  todos.sort(sortTodosByDueDate);
   todos.forEach((todo) => {
     const todoContainer = loadTodo(projectTitle, todo);
     todoViewContainer.appendChild(todoContainer);

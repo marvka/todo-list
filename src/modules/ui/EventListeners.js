@@ -89,9 +89,6 @@ export const editTodo = (project, todo) => () => {
 };
 
 export const submitTodoChanges = (project, todo) => () => {
-  // FIXME: Changed todos always propagate to the bottom of the todo list when
-  // submitting. Might have to implement alphabetical sorting or sorting by due
-  // date or some such down in UI.loadProject or UI.loadTodos
   const newProject = Database.findProject(
     document.querySelector('select#select-project').value,
   );
@@ -104,6 +101,8 @@ export const submitTodoChanges = (project, todo) => () => {
   newProject.addTodo(Todo(newTitle, newDueDate, newDescription, newPriority));
 
   Database.save();
+  // FIXME: loadProject loads the project, but not the Today overview when
+  // editing a todo while in the Today overview
   UI.loadProject(project);
   Forms.clearForm();
 };
