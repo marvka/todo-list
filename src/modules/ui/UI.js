@@ -66,7 +66,7 @@ const unloadTodoView = () => {
 
 export const loadHeading = (title) => {
   const todoViewContainer = document.getElementById('todo-view-container');
-  const heading = DomFactory('h2', { id: 'active-project-title' }, title);
+  const heading = DomFactory('h2', null, title);
   todoViewContainer.appendChild(heading);
 };
 
