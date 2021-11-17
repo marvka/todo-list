@@ -18,7 +18,8 @@ export const getChildNodeWithClass = (className, parentNode) => {
   return matchingNode;
 };
 
-export const sortTodosByDueDate = (todo1, todo2) => isAfter(todo1.dueDate, todo2.dueDate);
+export const sortTodosByDueDate = (todo1, todo2) =>
+  isAfter(todo1.dueDate, todo2.dueDate);
 
 export const sortTodosByTitle = (todo1, todo2) => {
   if (todo1.title > todo2.title) {

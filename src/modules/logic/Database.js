@@ -14,7 +14,7 @@ const Data = () => {
     },
     findProject(title) {
       const matchedProject = _projects.find(
-        (project) => project.title === title,
+        (project) => project.title === title
       );
       return matchedProject || false;
     },

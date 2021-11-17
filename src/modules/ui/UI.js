@@ -44,7 +44,7 @@ export const loadSidebar = () => {
     const projectElement = DomFactory(
       'li',
       { id: project.title, class: 'project' },
-      project.title,
+      project.title
     );
     projectElement.addEventListener('click', EventListeners.loadProject);
     sidebarList.appendChild(projectElement);
@@ -82,11 +82,11 @@ const loadTodo = (projectTitle, todo) => {
   const descriptionToggleButton = DomFactory(
     'button',
     { class: 'show-description' },
-    '+',
+    '+'
   );
   descriptionToggleButton.addEventListener(
     'click',
-    EventListeners.toggleTodoDescription(todo),
+    EventListeners.toggleTodoDescription(todo)
   );
 
   const checkboxElement = DomFactory('input', {
@@ -95,7 +95,7 @@ const loadTodo = (projectTitle, todo) => {
   });
   checkboxElement.addEventListener(
     'click',
-    EventListeners.deleteTodo(project, todo),
+    EventListeners.deleteTodo(project, todo)
   );
 
   const titleElement = DomFactory('p', null, todoTitle);
@@ -103,7 +103,7 @@ const loadTodo = (projectTitle, todo) => {
   const dueDateElement = DomFactory(
     'p',
     { class: 'due-date' },
-    formatISO(todo.dueDate, { representation: 'date' }),
+    formatISO(todo.dueDate, { representation: 'date' })
   );
 
   const editButton = new Image();
@@ -121,7 +121,7 @@ const loadTodo = (projectTitle, todo) => {
     checkboxElement,
     titleElement,
     dueDateElement,
-    editButton,
+    editButton
   );
   todoWrapper.append(containerElement);
   todoWrapper.append(description);
@@ -150,7 +150,7 @@ export const loadProject = (project) => {
     const newTodoButton = DomFactory('button', null, '+ Todo');
     newTodoButton.addEventListener(
       'click',
-      EventListeners.loadNewTodoForm(project),
+      EventListeners.loadNewTodoForm(project)
     );
     todoViewContainer.appendChild(newTodoButton);
   }

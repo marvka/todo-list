@@ -48,7 +48,7 @@ const createTodoForm = (curProject, curTodo) => {
   const projectLabel = DomFactory(
     'label',
     { for: 'select-project' },
-    'Project',
+    'Project'
   );
   const projectSelection = DomFactory('select', {
     name: 'select-project',
@@ -58,7 +58,7 @@ const createTodoForm = (curProject, curTodo) => {
     const projectOption = DomFactory(
       'option',
       { value: project.title },
-      project.title,
+      project.title
     );
     projectSelection.appendChild(projectOption);
   });
@@ -67,7 +67,7 @@ const createTodoForm = (curProject, curTodo) => {
   const descriptionLabel = DomFactory(
     'label',
     { for: 'form-description' },
-    'Description(optional)',
+    'Description(optional)'
   );
   const descriptionInput = DomFactory('input', {
     type: 'text',
@@ -87,7 +87,7 @@ const createTodoForm = (curProject, curTodo) => {
   const priorityLabel = DomFactory(
     'label',
     { for: 'priority-select' },
-    'Priority',
+    'Priority'
   );
   const selectPriority = DomFactory('select', {
     name: 'priority-select',
@@ -111,7 +111,7 @@ const createTodoForm = (curProject, curTodo) => {
     dueDateLabel,
     dueDateInput,
     priorityLabel,
-    selectPriority,
+    selectPriority
   );
   return formContainer;
 };
@@ -130,7 +130,7 @@ export const loadNewTodoForm = (project) => {
   const todoForm = createTodoForm(project);
   const buttons = createTodoFormButtons(
     EventListeners.addTodo,
-    EventListeners.clearForm,
+    EventListeners.clearForm
   );
   buttons.forEach((button) => todoForm.appendChild(button));
   body.appendChild(todoForm);
@@ -140,7 +140,7 @@ export const loadEditTodoForm = (project, todo) => {
   const todoForm = createTodoForm(project, todo);
   const buttons = createTodoFormButtons(
     EventListeners.submitTodoChanges(project, todo),
-    EventListeners.clearForm,
+    EventListeners.clearForm
   );
   buttons.forEach((button) => todoForm.appendChild(button));
   body.appendChild(todoForm);
