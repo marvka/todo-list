@@ -20,7 +20,7 @@ export const loadNewTodoForm = (project) => () => {
 
 export const loadTodosDueToday = () => {
   const projectsWithTodosDueToday = Database.projects.filter(
-    (project) => project.todosDueToday.length > 0,
+    (project) => project.todosDueToday.length > 0
   );
   UI.loadTodosDueToday(projectsWithTodosDueToday);
 };
@@ -68,7 +68,7 @@ export const addTodo = () => {
     const errorMessage = DomFactory(
       'p',
       { class: 'error-message' },
-      'Please fill in the highlighted fields!',
+      'Please fill in the highlighted fields!'
     );
     formContainer.appendChild(errorMessage);
     return;
@@ -88,7 +88,7 @@ export const editTodo = (project, todo) => () => {
 
 export const submitTodoChanges = (project, todo) => () => {
   const newProject = Database.findProject(
-    document.querySelector('select#select-project').value,
+    document.querySelector('select#select-project').value
   );
   const newTitle = document.querySelector('input#form-title').value;
   const newDueDate = document.querySelector('input#form-dueDate').valueAsDate;
