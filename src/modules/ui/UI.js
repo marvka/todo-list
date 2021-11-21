@@ -99,6 +99,18 @@ const loadTodo = (projectTitle, todo) => {
   );
 
   const titleElement = DomFactory('p', null, todoTitle);
+  switch (todo.priority) {
+    case 'low':
+      titleElement.style.color = 'blue';
+      break;
+    case 'medium':
+      titleElement.style.color = 'yellow';
+      break;
+    case 'high':
+      titleElement.style.color = 'red';
+      break;
+    default:
+  }
 
   const dueDateElement = DomFactory(
     'p',
