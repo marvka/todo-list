@@ -19,10 +19,7 @@ export const loadNewTodoForm = (project) => () => {
 };
 
 export const loadTodosDueToday = () => {
-  const projectsWithTodosDueToday = Database.projects.filter(
-    (project) => project.todosDueToday.length > 0
-  );
-  UI.loadTodosDueToday(projectsWithTodosDueToday);
+  UI.loadTodosDueToday();
 };
 
 export const addNewProject = () => {
@@ -99,9 +96,11 @@ export const submitTodoChanges = (project, todo) => () => {
   newProject.addTodo(Todo(newTitle, newDueDate, newDescription, newPriority));
 
   Database.save();
-  // FIXME: loadProject loads the project, but not the Today overview when
-  // editing a todo while in the Today overview
-  UI.loadProject(project);
+  if (document.querySelector('#today.project-heading')) {
+    UI.loadTodosDueToday();
+  } else {
+    UI.loadProject(project);
+  }
   Forms.clearForm();
 };
 

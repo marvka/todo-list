@@ -66,7 +66,7 @@ const unloadTodoView = () => {
 
 export const loadHeading = (title) => {
   const todoViewContainer = document.getElementById('todo-view-container');
-  const heading = DomFactory('h2', null, title);
+  const heading = DomFactory('h2', { class: 'project-heading' }, title);
   todoViewContainer.appendChild(heading);
 };
 
@@ -156,9 +156,13 @@ export const loadProject = (project) => {
   }
 };
 
-export const loadTodosDueToday = (projectsWithTodosDueToday) => {
+export const loadTodosDueToday = () => {
   unloadTodoView();
   loadHeading('Today');
+  document.querySelector('.project-heading').id = 'today';
+  const projectsWithTodosDueToday = Database.projects.filter(
+    (project) => project.todosDueToday.length > 0
+  );
   projectsWithTodosDueToday.forEach((project) => {
     const todos = project.todos.filter((todo) => todo.isDueToday());
     loadTodos(project.title, todos);
